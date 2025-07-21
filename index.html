@@ -1,0 +1,1279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claim Scouter - Stop Leaving Money on the Table</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                            <div class="logo">
+                <div class="logo-icon">
+                    <img src="logo.svg" alt="Claim Scouter" class="logo-image">
+                    <div class="logo-fallback">🧭🔍</div>
+                </div>
+                <span class="logo-text">Claim Scouter</span>
+            </div>
+                <nav class="nav">
+                    <a href="#how-it-works">How It Works</a>
+                    <a href="#pricing">Pricing</a>
+                    <a href="#customer-stories">Customer Stories</a>
+                    <a href="#faq">FAQ</a>
+                </nav>
+                <div class="header-cta">
+                    <button class="btn btn-primary" onclick="openOnboardingModal()">Get Started</button>
+                </div>
+                <button class="mobile-menu-toggle" aria-label="Toggle mobile menu" aria-expanded="false">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>Stop Leaving Money on the Table</h1>
+                    <p>Billions of dollars in settlement funds go unclaimed every year. Claim Scouter is your automated advocate - a "set it and forget it" service that finds and files claims for class action settlements you're owed, turning complex legal processes into passive income.</p>
+                    <form class="email-form" id="emailForm">
+                        <div class="form-group">
+                            <input type="email" placeholder="Enter your email address" required>
+                            <button type="submit" class="btn btn-primary" onclick="handleHeroEmailSubmit(event)">Get Started</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="hero-visual">
+                    <div class="app-mockup">
+                        <div class="phone-frame">
+                            <div class="phone-notch"></div>
+                            <div class="phone-screen">
+                                <!-- Status Bar -->
+                                <div class="status-bar">
+                                    <div class="status-left">
+                                        <span class="time">9:41</span>
+                                    </div>
+                                    <div class="status-right">
+                                        <span class="signal">📶</span>
+                                        <span class="wifi">📶</span>
+                                        <span class="battery">🔋</span>
+                                    </div>
+                                </div>
+                                
+                                <!-- App Header -->
+                                <div class="app-header">
+                                    <div class="header-content">
+                                        <div class="user-greeting">
+                                            <h2>Hello, Sarah! 👋</h2>
+                                            <p>Your passive income is growing</p>
+                                        </div>
+                                        <div class="profile-avatar">
+                                            <span>S</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Main Content -->
+                                <div class="app-content">
+                                    <!-- Earnings Summary Card -->
+                                    <div class="earnings-card">
+                                        <div class="earnings-header">
+                                            <span class="earnings-label">Total Recovered</span>
+                                            <span class="period-toggle">This Month</span>
+                                        </div>
+                                        <div class="earnings-amount">$247</div>
+                                        <div class="earnings-change">
+                                            <span class="change-indicator">↗️ +$125</span>
+                                            <span class="change-text">from last month</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Quick Actions -->
+                                    <div class="quick-actions">
+                                        <div class="action-item">
+                                            <div class="action-icon pending">3</div>
+                                            <span>Pending</span>
+                                        </div>
+                                        <div class="action-item">
+                                            <div class="action-icon approved">✓</div>
+                                            <span>Approved</span>
+                                        </div>
+                                        <div class="action-item">
+                                            <div class="action-icon history">📄</div>
+                                            <span>History</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Claims Section -->
+                                    <div class="claims-section">
+                                                                <div class="section-header">
+                            <h3>New Claims Found</h3>
+                            <span class="claims-count">3 Available</span>
+                        </div>
+                                        
+                                        <div class="claims-list">
+                                            <div class="claim-card">
+                                                <div class="claim-company">
+                                                    <div class="company-logo facebook">f</div>
+                                                    <div class="claim-details">
+                                                                                                <h4>Facebook Data Settlement</h4>
+                                        <p>Class Action • Data Privacy</p>
+                                                    </div>
+                                                </div>
+                                                <div class="claim-actions">
+                                                    <div class="claim-amount">$85</div>
+                                                    <button class="approve-btn">Approve</button>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="claim-card">
+                                                <div class="claim-company">
+                                                    <div class="company-logo equifax">E</div>
+                                                    <div class="claim-details">
+                                                                                                <h4>Equifax Breach</h4>
+                                        <p>Data Breach • Identity Protection</p>
+                                                    </div>
+                                                </div>
+                                                <div class="claim-actions">
+                                                    <div class="claim-amount">$125</div>
+                                                    <button class="approve-btn">Approve</button>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="claim-card">
+                                                <div class="claim-company">
+                                                    <div class="company-logo generic">C</div>
+                                                    <div class="claim-details">
+                                                                                                <h4>Consumer Protection</h4>
+                                        <p>Product Liability • Electronics</p>
+                                                    </div>
+                                                </div>
+                                                <div class="claim-actions">
+                                                    <div class="claim-amount">$37</div>
+                                                    <button class="approve-btn">Approve</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Bottom Navigation -->
+                                <div class="bottom-nav">
+                                    <div class="nav-item active">
+                                        <div class="nav-icon">🏠</div>
+                                        <span>Home</span>
+                                    </div>
+                                    <div class="nav-item">
+                                        <div class="nav-icon">📊</div>
+                                        <span>Analytics</span>
+                                    </div>
+                                    <div class="nav-item">
+                                        <div class="nav-icon">⚙️</div>
+                                        <span>Settings</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trust Bar -->
+    <section class="trust-bar">
+        <div class="container">
+            <h3>As featured in</h3>
+            <div class="trust-logos">
+                <!-- Forbes Logo -->
+                <div class="logo-item">
+                    <svg width="160" height="40" viewBox="0 0 160 45" xmlns="http://www.w3.org/2000/svg">
+                        <text x="80" y="28" text-anchor="middle" font-family="Georgia, serif" font-size="24" font-weight="bold" fill="#666" letter-spacing="0.5px">FORBES</text>
+                    </svg>
+                </div>
+                
+                <!-- TechCrunch Logo -->
+                <div class="logo-item">
+                    <svg width="180" height="40" viewBox="0 0 180 45" xmlns="http://www.w3.org/2000/svg">
+                        <text x="90" y="18" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#0f9d58">Tech</text>
+                        <text x="90" y="34" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#0f9d58">Crunch</text>
+                    </svg>
+                </div>
+                
+                <!-- NerdWallet Logo -->
+                <div class="logo-item">
+                    <svg width="170" height="40" viewBox="0 0 170 45" xmlns="http://www.w3.org/2000/svg">
+                        <text x="85" y="28" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="600" fill="#666">NerdWallet</text>
+                    </svg>
+                </div>
+                
+                <!-- Wired Logo -->
+                <div class="logo-item">
+                    <svg width="130" height="40" viewBox="0 0 130 45" xmlns="http://www.w3.org/2000/svg">
+                        <text x="65" y="28" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#666" letter-spacing="2px">WIRED</text>
+                    </svg>
+                </div>
+                
+                <!-- Money Logo -->
+                <div class="logo-item">
+                    <svg width="130" height="40" viewBox="0 0 130 45" xmlns="http://www.w3.org/2000/svg">
+                        <text x="65" y="28" text-anchor="middle" font-family="Georgia, serif" font-size="20" font-weight="bold" fill="#666" letter-spacing="1px">MONEY</text>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Value Proposition -->
+    <section class="value-prop">
+        <div class="container">
+            <div class="value-prop-content">
+                <div class="value-prop-text">
+                    <h2>We find money you didn't know existed</h2>
+                    <p class="value-prop-description">Millions of dollars in unclaimed settlements go unnoticed every year. Our AI scans thousands of class action lawsuits to find compensation you're entitled to—automatically and for free.</p>
+                    
+                    <div class="stats-container">
+                        <div class="stat-item">
+                            <div class="stat-number">$2.8B</div>
+                            <div class="stat-label">Unclaimed annually</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">15K+</div>
+                            <div class="stat-label">Active settlements</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">98%</div>
+                            <div class="stat-label">AI accuracy rate</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="value-prop-visual">
+                    <div class="chart-container">
+                        <div class="chart-title">Annual Recovery Potential</div>
+                        <div class="chart">
+                            <div class="chart-bar" data-amount="150">
+                                <div class="bar-fill" style="height: 88%;">
+                                    <span class="bar-label">Claim Scouter AI</span>
+                                    <span class="bar-amount">$150</span>
+                                </div>
+                            </div>
+                            <div class="chart-bar" data-amount="20">
+                                <div class="bar-fill traditional" style="height: 20%;">
+                                    <span class="bar-label">Manual Search</span>
+                                    <span class="bar-amount">$20</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="chart-legend">
+                            <div class="legend-item">
+                                <div class="legend-color ai"></div>
+                                <span>AI-Powered Recovery</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-color traditional"></div>
+                                <span>Traditional Methods</span>
+                            </div>
+                        </div>
+                        <div class="chart-difference">
+                            <div class="difference-highlight">
+                                <span class="difference-label">Potential Additional Recovery:</span>
+                                <span class="difference-amount">+$130/year</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="how-it-works" id="how-it-works">
+        <div class="container">
+            <h2>Get Paid in 3 Simple Steps</h2>
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-icon">
+                        <i class="fas fa-link"></i>
+                    </div>
+                    <h3>Connect</h3>
+                    <p>Securely connect your email and bank accounts via Plaid. We scan your purchase history to find eligible settlements automatically.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3>We Handle Everything</h3>
+                    <p>Our automated system finds claims, fills out forms, and files them for you. Just click "approve" when we find money you're owed.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-icon">
+                        <i class="fas fa-dollar-sign"></i>
+                    </div>
+                    <h3>Get Paid</h3>
+                    <p>Months later, settlement funds are automatically deposited to your account. We take 25% of recoveries and you keep 75%.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <div class="container">
+            <h2>Join 10,000+ Members Who've Recovered Money</h2>
+            <p class="subtitle">We've helped our members recover over $2.5 million in unclaimed settlements</p>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"I was skeptical at first, but Claim Scouter found $150 in settlements I didn't even know existed. The process was completely automated!"</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="author-info">
+                            <h4>Sarah M.</h4>
+                            <p>California</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"The signup was surprisingly fast. I was done in less than two minutes and they found my first claim within a week."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="author-info">
+                            <h4>Jessica S.</h4>
+                            <p>Texas</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"I was hesitant, but they only charged me after I got $85 in my bank account. Totally worth it."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="author-info">
+                            <h4>Mark T.</h4>
+                            <p>New York</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing" id="pricing">
+        <div class="container">
+            <div class="pricing-header">
+                <h2>Just $2/Month + 25% of What We Recover for You</h2>
+                <p>Simple, transparent pricing with a guarantee that puts our success on the line.</p>
+            </div>
+            <div class="pricing-card">
+                <div class="pricing-badge">
+                    <span>$24/Year + 25%</span>
+                </div>
+                <div class="pricing-content">
+                    <h3>Simple & Transparent Pricing</h3>
+                    <p>Pay just $24 per year (only $2/month) plus 25% of settlements we recover. If we don't find at least $48 in available claims within 12 months, we'll refund your entire annual fee.</p>
+                    <div class="pricing-features">
+                        <div class="feature-item">
+                            <i class="fas fa-check"></i>
+                            <span>Only $2 Per Month ($24/Year)</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check"></i>
+                            <span>25% Fee Only on Money Recovered</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check"></i>
+                            <span>Full Refund if We Don't Find $48+ in Claims</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check"></i>
+                            <span>Unlimited Claim Monitoring</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check"></i>
+                            <span>Automated Filing Included</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check"></i>
+                            <span>You Keep 75% of All Recoveries</span>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary btn-large" onclick="openOnboardingModal()">Get Started</button>
+                </div>
+            </div>
+            <div class="pricing-faq">
+                <h3>Frequently Asked Questions</h3>
+                <div class="faq-grid">
+                    <div class="faq-item">
+                        <h4>How does the $24/year + 25% pricing work?</h4>
+                        <p>You pay $24 per year (only $2/month) for unlimited access, plus we take 25% of any settlement money we successfully recover for you. You keep 75% of all recoveries.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h4>What's the money-back guarantee?</h4>
+                        <p>If we don't find at least $48 in available claims for you within 12 months (double your $24 fee), we'll refund your entire annual fee. No questions asked.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h4>Are there any other costs?</h4>
+                        <p>No. The $24 annual fee plus 25% of recoveries is all you pay. There are no setup fees, hidden charges, or other costs.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Customer Stories Section -->
+    <section class="customer-stories" id="customer-stories">
+        <div class="container">
+            <h2>Real Stories From Real People</h2>
+            <p class="subtitle">See how Claim Scouter has helped people like you recover money they didn't know they were owed</p>
+            <div class="stories-carousel">
+                <div class="carousel-container">
+                    <div class="carousel-track" id="storiesTrack">
+                        <div class="story-card">
+                            <div class="story-header">
+                                <h3>How Sarah from California Recovered $150 in 3 Months</h3>
+                                <p class="story-persona">Tech professional, age 32</p>
+                            </div>
+                            <div class="story-content">
+                                <div class="story-stats">
+                                    <div class="stat">
+                                        <span class="stat-number">$150</span>
+                                        <span class="stat-label">Amount Recovered</span>
+                                    </div>
+                                    <div class="stat">
+                                        <span class="stat-number">3</span>
+                                        <span class="stat-label">Claims Found</span>
+                                    </div>
+                                    <div class="stat">
+                                        <span class="stat-number">5 min</span>
+                                        <span class="stat-label">Setup Time</span>
+                                    </div>
+                                </div>
+                                <div class="story-quote">
+                                    <p>"I was skeptical at first, but Claim Scouter found $150 in settlements I didn't even know existed. The process was completely automated - I just had to approve the claims they found. Within 3 months, I had money in my bank account that I never would have known about otherwise."</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="story-card">
+                            <div class="story-header">
+                                <h3>How Mark from New York Got $85 Back from Facebook</h3>
+                                <p class="story-persona">Small business owner, age 45</p>
+                            </div>
+                            <div class="story-content">
+                                <div class="story-stats">
+                                    <div class="stat">
+                                        <span class="stat-number">$85</span>
+                                        <span class="stat-label">Amount Recovered</span>
+                                    </div>
+                                    <div class="stat">
+                                        <span class="stat-number">1</span>
+                                        <span class="stat-label">Claim Found</span>
+                                    </div>
+                                    <div class="stat">
+                                        <span class="stat-number">2 min</span>
+                                        <span class="stat-label">Setup Time</span>
+                                    </div>
+                                </div>
+                                <div class="story-quote">
+                                    <p>"I was hesitant about connecting my accounts, but the security measures put me at ease. They found a Facebook data settlement claim I was eligible for. The automated filing handled everything - I just clicked approve and got paid months later."</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="story-card">
+                            <div class="story-header">
+                                <h3>How Jessica from Texas Recovered $200+ in Multiple Settlements</h3>
+                                <p class="story-persona">Marketing consultant, age 28</p>
+                            </div>
+                            <div class="story-content">
+                                <div class="story-stats">
+                                    <div class="stat">
+                                        <span class="stat-number">$200+</span>
+                                        <span class="stat-label">Amount Recovered</span>
+                                    </div>
+                                    <div class="stat">
+                                        <span class="stat-number">4</span>
+                                        <span class="stat-label">Claims Found</span>
+                                    </div>
+                                    <div class="stat">
+                                        <span class="stat-number">3 min</span>
+                                        <span class="stat-label">Setup Time</span>
+                                    </div>
+                                </div>
+                                <div class="story-quote">
+                                    <p>"The signup was surprisingly fast. I was done in less than two minutes and they found my first claim within a week. They've since found 3 more settlements I was eligible for. The automated filing is amazing - I just approve and they handle everything else."</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="story-card">
+                            <div class="story-header">
+                                <h3>How David from Florida Recovered $320 from Equifax Breach</h3>
+                                <p class="story-persona">Retired teacher, age 62</p>
+                            </div>
+                            <div class="story-content">
+                                <div class="story-stats">
+                                    <div class="stat">
+                                        <span class="stat-number">$320</span>
+                                        <span class="stat-label">Amount Recovered</span>
+                                    </div>
+                                    <div class="stat">
+                                        <span class="stat-number">2</span>
+                                        <span class="stat-label">Claims Found</span>
+                                    </div>
+                                    <div class="stat">
+                                        <span class="stat-number">4 min</span>
+                                        <span class="stat-label">Setup Time</span>
+                                    </div>
+                                </div>
+                                <div class="story-quote">
+                                    <p>"I'm not very tech-savvy, but my daughter convinced me to try Claim Scout. I'm so glad I did! They found money from the Equifax breach and another settlement I'd never heard of. The whole process was automatic - I didn't have to fill out any forms."</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="story-card">
+                            <div class="story-header">
+                                <h3>How Amanda from Chicago Recovered $95 from Data Breaches</h3>
+                                <p class="story-persona">Graduate student, age 24</p>
+                            </div>
+                            <div class="story-content">
+                                <div class="story-stats">
+                                    <div class="stat">
+                                        <span class="stat-number">$95</span>
+                                        <span class="stat-label">Amount Recovered</span>
+                                    </div>
+                                    <div class="stat">
+                                        <span class="stat-number">2</span>
+                                        <span class="stat-label">Claims Found</span>
+                                    </div>
+                                    <div class="stat">
+                                        <span class="stat-number">90 sec</span>
+                                        <span class="stat-label">Setup Time</span>
+                                    </div>
+                                </div>
+                                <div class="story-quote">
+                                    <p>"As a broke student, every dollar counts. Claim Scout found claims from two different data breaches that I was affected by. The money came at the perfect time - right when I needed textbooks for the semester. Set it and forget it really works!"</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="story-card">
+                            <div class="story-header">
+                                <h3>How Robert from Seattle Recovered $450 Across 6 Settlements</h3>
+                                <p class="story-persona">Software engineer, age 35</p>
+                            </div>
+                            <div class="story-content">
+                                <div class="story-stats">
+                                    <div class="stat">
+                                        <span class="stat-number">$450</span>
+                                        <span class="stat-label">Amount Recovered</span>
+                                    </div>
+                                    <div class="stat">
+                                        <span class="stat-number">6</span>
+                                        <span class="stat-label">Claims Found</span>
+                                    </div>
+                                    <div class="stat">
+                                        <span class="stat-number">2 min</span>
+                                        <span class="stat-label">Setup Time</span>
+                                    </div>
+                                </div>
+                                <div class="story-quote">
+                                    <p>"I've been using Claim Scouter for over a year now. They keep finding new settlements I'm eligible for - everything from tech companies to food recalls. The passive income aspect is amazing. I literally do nothing and money appears in my account."</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-controls">
+                    <button class="carousel-btn prev" onclick="moveCarousel(-1)">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <div class="carousel-dots" id="carouselDots"></div>
+                    <button class="carousel-btn next" onclick="moveCarousel(1)">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq" id="faq">
+        <div class="container">
+            <h2>Frequently Asked Questions</h2>
+            <p class="subtitle">Everything you need to know about Claim Scouter</p>
+            <div class="faq-container">
+                <div class="faq-categories">
+                    <button class="faq-category active" data-category="security">Security & Privacy</button>
+                    <button class="faq-category" data-category="how-it-works">How It Works</button>
+                    <button class="faq-category" data-category="eligibility">Eligibility & Payouts</button>
+                    <button class="faq-category" data-category="account">Account Management</button>
+                </div>
+                <div class="faq-search">
+                    <input type="text" placeholder="Search questions..." id="faqSearch">
+                    <i class="fas fa-search"></i>
+                </div>
+                <div class="faq-content">
+                    <div class="faq-section active" data-category="security">
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <h3>Is my data secure?</h3>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Yes, absolutely. We use bank-level AES-256 encryption and partner with Plaid for secure bank connections. We never see or store your banking passwords, and all connections are read-only.</p>
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <h3>What information do you access?</h3>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>We only access the information necessary to find claims: email receipts and transaction history. We use Plaid to connect to your bank, which means we never see your banking credentials.</p>
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <h3>Do you sell my data?</h3>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Never. Your data is only used to find claims you're eligible for. We have a strict privacy policy and never sell, rent, or share your personal information with third parties.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="faq-section" data-category="how-it-works">
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <h3>How do you find claims?</h3>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Our automated system continuously monitors your purchase history against our comprehensive database of active class action settlements. We scan email receipts and transaction data to identify matches, then use Robotic Process Automation (RPA) to automatically file claims on your behalf.</p>
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <h3>How long does the process take?</h3>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Initial claim scanning takes 24-48 hours. Once we find claims, you can approve them with one click. Payouts typically arrive within 30-90 days, depending on the settlement timeline.</p>
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <h3>Do I need to do anything after signing up?</h3>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>No! Once you connect your accounts, we handle everything automatically. We'll notify you when we find claims, and you just need to approve them. We file all the paperwork and track the process for you.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="faq-section" data-category="eligibility">
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <h3>What types of settlements do you cover?</h3>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>We cover a wide range of class action settlements including data breaches, consumer fraud, defective products, antitrust cases, and more. We monitor both active and upcoming settlements.</p>
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <h3>How much money can I expect?</h3>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Payouts vary widely depending on the settlement. Some claims are worth $5-25, while others can be hundreds of dollars. The average user recovers $50-150 across multiple settlements. Remember, we guarantee to find at least $48 in available claims in your first year or we refund your $24 fee.</p>
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <h3>Will this affect my credit score?</h3>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>No, filing claims for class action settlements does not affect your credit score. These are not loans or credit applications - they're simply claiming money you're already owed.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="faq-section" data-category="account">
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <h3>Can I disconnect my accounts later?</h3>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Yes, you can disconnect your accounts at any time through your dashboard. However, keeping them connected allows us to continue monitoring for new claims on your behalf.</p>
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <h3>How do I update my payment information?</h3>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>You can update your payment information anytime in your account settings. We'll use your updated payment method for all future payouts.</p>
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <h3>Can I cancel my account?</h3>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Yes, you can cancel your account at any time. If we've already filed claims on your behalf, you'll still receive any payouts you're owed, minus our success fee.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Us Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-header">
+                                                <h2>About Claim Scouter</h2>
+                    <p class="subtitle">We're on a mission to help people recover money they're owed from class action settlements and unclaimed funds.</p>
+                </div>
+                <div class="about-grid">
+                    <div class="about-story">
+                        <h3>Our Story</h3>
+                        <p>Claim Scouter was founded when our team discovered that billions of dollars in settlement money goes unclaimed every year simply because people don't know they're eligible. We realized that with the right technology, we could automatically find and file these claims for people.</p>
+                        <p>Since launching, we've helped over 10,000 users recover more than $2.5 million in unclaimed money from settlements they never knew existed.</p>
+                    </div>
+                    <div class="about-mission">
+                        <h3>Our Mission</h3>
+                        <p>We believe everyone deserves to get the money they're owed. Our automated platform does the hard work of finding eligible claims and filing the paperwork, so you don't have to.</p>
+                        <div class="mission-stats">
+                            <div class="stat-item">
+                                <div class="stat-number">$2.5M+</div>
+                                <div class="stat-label">Recovered for Users</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">10,000+</div>
+                                <div class="stat-label">Active Members</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">95%</div>
+                                <div class="stat-label">Success Rate</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-team">
+                    <h3>Our Team</h3>
+                    <p>We're a team of engineers, legal experts, and consumer advocates who are passionate about helping people get the money they deserve. Our backgrounds span fintech, legal services, and consumer protection.</p>
+                    <div class="team-values">
+                        <div class="value-item">
+                            <div class="value-icon">🔒</div>
+                            <h4>Security First</h4>
+                            <p>Bank-level encryption and read-only access ensure your data stays safe.</p>
+                        </div>
+                        <div class="value-item">
+                            <div class="value-icon">⚡</div>
+                            <h4>Automation</h4>
+                            <p>Our technology does the work so you don't have to research or file claims manually.</p>
+                        </div>
+                        <div class="value-item">
+                            <div class="value-icon">💰</div>
+                            <h4>Fair Pricing</h4>
+                            <p>You only pay when we successfully recover money for you.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Learn Section -->
+    <section class="learn" id="learn">
+        <div class="container">
+            <div class="learn-content">
+                <div class="learn-header">
+                    <h2>Learn About Class Action Settlements</h2>
+                    <p class="subtitle">Understanding how settlements work and your rights as a consumer</p>
+                </div>
+                <div class="learn-grid">
+                    <div class="learn-articles">
+                        <h3>Educational Resources</h3>
+                        <div class="article-list">
+                            <div class="article-item">
+                                <div class="article-icon">📚</div>
+                                <div class="article-content">
+                                    <h4>What Are Class Action Settlements?</h4>
+                                    <p>Learn how class action lawsuits work and why you might be entitled to settlement money.</p>
+                                    <a href="what-are-class-action-settlements.html" class="article-link">Read More →</a>
+                                </div>
+                            </div>
+                            <div class="article-item">
+                                <div class="article-icon">💡</div>
+                                <div class="article-content">
+                                    <h4>Common Types of Consumer Claims</h4>
+                                    <p>Discover the most common types of settlements: data breaches, product defects, and more.</p>
+                                    <a href="common-types-of-consumer-claims.html" class="article-link">Read More →</a>
+                                </div>
+                            </div>
+                            <div class="article-item">
+                                <div class="article-icon">⚖️</div>
+                                <div class="article-content">
+                                    <h4>Your Consumer Rights</h4>
+                                    <p>Understand your rights and how to protect yourself from unfair business practices.</p>
+                                    <a href="your-consumer-rights.html" class="article-link">Read More →</a>
+                                </div>
+                            </div>
+                            <div class="article-item">
+                                <div class="article-icon">🔍</div>
+                                <div class="article-content">
+                                    <h4>How to Check for Unclaimed Money</h4>
+                                    <p>Learn about other sources of unclaimed funds beyond class action settlements.</p>
+                                    <a href="how-to-check-for-unclaimed-money.html" class="article-link">Read More →</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="learn-recent">
+                        <h3>Recent Settlements</h3>
+                        <div class="settlement-list">
+                            <div class="settlement-item">
+                                <div class="settlement-info">
+                                    <h4>Facebook Privacy Settlement</h4>
+                                    <p class="settlement-amount">Up to $400 per claim</p>
+                                    <span class="settlement-deadline">Deadline: March 2024</span>
+                                </div>
+                                <span class="settlement-status active">Active</span>
+                            </div>
+                            <div class="settlement-item">
+                                <div class="settlement-info">
+                                    <h4>Equifax Data Breach</h4>
+                                    <p class="settlement-amount">Up to $125 per claim</p>
+                                    <span class="settlement-deadline">Deadline: January 2024</span>
+                                </div>
+                                <span class="settlement-status closed">Closed</span>
+                            </div>
+                            <div class="settlement-item">
+                                <div class="settlement-info">
+                                    <h4>iPhone Throttling Settlement</h4>
+                                    <p class="settlement-amount">$25 per device</p>
+                                    <span class="settlement-deadline">Deadline: October 2023</span>
+                                </div>
+                                <span class="settlement-status closed">Closed</span>
+                            </div>
+                        </div>
+                        <div class="learn-cta">
+                            <h4>Stay Updated</h4>
+                            <p>Get notified when new settlements become available</p>
+                            <button class="btn btn-primary" onclick="openOnboardingModal()">Join Claim Scouter</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-cta">
+                                                <h2>Ready to Find Your Money?</h2>
+                    <button class="btn btn-primary btn-large" onclick="openOnboardingModal()">Get Started</button>
+                </div>
+                <div class="footer-links">
+                    <div class="link-group">
+                        <h4>Product</h4>
+                        <a href="#how-it-works">How It Works</a>
+                        <a href="#pricing">Pricing</a>
+                        <a href="#customer-stories">Customer Stories</a>
+                    </div>
+                    <div class="link-group">
+                        <h4>Company</h4>
+                        <a href="#about">About Us</a>
+                    </div>
+                    <div class="link-group">
+                        <h4>Resources</h4>
+                        <a href="#learn">Learn</a>
+                        <a href="#faq">FAQ</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Multi-Step Onboarding Modal -->
+    <div class="modal-overlay" id="onboardingModal">
+        <div class="modal">
+            <div class="modal-header">
+                <button class="modal-close" onclick="closeOnboardingModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+                <div class="progress-bar">
+                    <div class="progress-step active" data-step="1">1</div>
+                    <div class="progress-step" data-step="2">2</div>
+                    <div class="progress-step" data-step="3">3</div>
+                    <div class="progress-step" data-step="4">4</div>
+                </div>
+            </div>
+            
+            <div class="modal-content">
+                <!-- Step 1: Create Account -->
+                <div class="modal-step active" id="step1">
+                    <div class="step-content">
+                        <div class="step-header">
+                            <h2>Welcome! Let's Get Started</h2>
+                            <p class="step-description">Create your secure account to start finding money you're owed. Our platform has already helped users recover over $2.4 million in unclaimed settlements.</p>
+                        </div>
+                        
+                        <div class="benefits-list">
+                            <div class="benefit-item">
+                                <div class="benefit-icon">🔒</div>
+                                <div class="benefit-text">
+                                    <strong>Bank-level security</strong>
+                                    <span>Your data is protected with AES-256 encryption</span>
+                                </div>
+                            </div>
+                            <div class="benefit-item">
+                                <div class="benefit-icon">⚡</div>
+                                <div class="benefit-text">
+                                    <strong>Quick setup</strong>
+                                    <span>Takes less than 2 minutes to get started</span>
+                                </div>
+                            </div>
+                            <div class="benefit-item">
+                                <div class="benefit-icon">💰</div>
+                                <div class="benefit-text">
+                                    <strong>Average recovery: $150+</strong>
+                                    <span>Most users find multiple claims worth $50-300</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <form class="step-form">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Full Name</label>
+                                    <input type="text" placeholder="Enter your full name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Email Address</label>
+                                    <input type="email" placeholder="Enter your email" required>
+                                </div>
+                            </div>
+                            <div class="form-footer">
+                                <p class="privacy-note">
+                                    <i class="fas fa-shield-alt"></i>
+                                    We never sell your data. Read our <a href="#privacy" style="color: #667eea;">Privacy Policy</a>.
+                                </p>
+                                <button type="button" class="btn btn-primary btn-large" onclick="nextStep(2)">
+                                    Continue to Account Setup
+                                    <i class="fas fa-arrow-right"></i>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="step-sidebar">
+                        <div class="sidebar-content">
+                            <h3>Why Choose Claim Scouter?</h3>
+                            <div class="testimonial-mini">
+                                <p>"The signup was surprisingly fast. I was done in less than two minutes and they found my first claim within a week."</p>
+                                <span>- Jessica S., Marketing Consultant</span>
+                            </div>
+                            
+                            <div class="stats-mini">
+                                <div class="stat-item">
+                                    <div class="stat-number">$2.4M+</div>
+                                    <div class="stat-label">Recovered for users</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-number">10,000+</div>
+                                    <div class="stat-label">Active members</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-number">95%</div>
+                                    <div class="stat-label">Success rate</div>
+                                </div>
+                            </div>
+                            
+                            <div class="trust-indicators">
+                                <div class="trust-item">
+                                    <i class="fas fa-check"></i>
+                                    <span>SOC 2 Compliant</span>
+                                </div>
+                                <div class="trust-item">
+                                    <i class="fas fa-check"></i>
+                                    <span>GDPR Compliant</span>
+                                </div>
+                                <div class="trust-item">
+                                    <i class="fas fa-check"></i>
+                                    <span>BBB Accredited</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 2: Connect Accounts -->
+                <div class="modal-step" id="step2">
+                    <div class="step-content">
+                        <h2>Connect Your Accounts to Find Claims</h2>
+                        <p class="explanation">Why we ask: To find money you're owed, our secure engine scans your email receipts and transaction history for eligible purchases. We use Plaid to connect to your bank, which means we never see or store your banking password. The connection is read-only.</p>
+                        <div class="connection-options">
+                            <div class="connection-card">
+                                <div class="connection-header">
+                                    <i class="fab fa-google"></i>
+                                    <h3>Connect Google</h3>
+                                </div>
+                                <p>Scan email receipts for eligible purchases</p>
+                                <button class="btn btn-outline">Connect</button>
+                            </div>
+                            <div class="connection-card">
+                                <div class="connection-header">
+                                    <i class="fas fa-university"></i>
+                                    <h3>Connect Bank via Plaid</h3>
+                                </div>
+                                <p>Scan transaction history for claims</p>
+                                <button class="btn btn-outline">Connect</button>
+                            </div>
+                        </div>
+                        <div class="trust-badges">
+                            <div class="badge">
+                                <i class="fas fa-shield-alt"></i>
+                                <span>Secured by Plaid</span>
+                            </div>
+                            <div class="badge">
+                                <i class="fas fa-lock"></i>
+                                <span>Bank-level AES-256 Encryption</span>
+                            </div>
+                        </div>
+                        <p class="social-proof">Over 15,000 users have securely connected their accounts to find claims.</p>
+                        <button type="button" class="btn btn-primary" onclick="nextStep(3)">Next</button>
+                    </div>
+                    <div class="step-sidebar">
+                        <div class="testimonial-mini">
+                            <p>"I was skeptical about connecting my accounts, but the security measures put me at ease."</p>
+                            <span>- Sarah M.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 3: Payout Method -->
+                <div class="modal-step" id="step3">
+                    <div class="step-content">
+                        <h2>How Would You Like to Get Paid?</h2>
+                        <p>When we successfully recover money for you, we'll send it directly to your preferred account. Choose where you'd like to receive your funds.</p>
+                        <div class="payout-options">
+                            <div class="payout-card">
+                                <div class="payout-icon">
+                                    <i class="fas fa-university"></i>
+                                </div>
+                                <div class="payout-info">
+                                    <h3>Direct Deposit (Bank)</h3>
+                                    <p>Fastest way to receive your funds</p>
+                                </div>
+                                <input type="radio" name="payout" value="bank" checked>
+                            </div>
+                            <div class="payout-card">
+                                <div class="payout-icon">
+                                    <i class="fab fa-paypal"></i>
+                                </div>
+                                <div class="payout-info">
+                                    <h3>PayPal</h3>
+                                    <p>Instant transfer to your PayPal account</p>
+                                </div>
+                                <input type="radio" name="payout" value="paypal">
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-primary" onclick="nextStep(4)">Next: Final Step</button>
+                    </div>
+                    <div class="step-sidebar">
+                        <div class="testimonial-mini">
+                            <p>"I got my first payout in just 3 days. The direct deposit was seamless."</p>
+                            <span>- Mark T.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 4: Waitlist Confirmation -->
+                <div class="modal-step" id="step4">
+                    <div class="step-content">
+                        <div class="waitlist-header">
+                            <div class="waitlist-icon">
+                                <i class="fas fa-rocket"></i>
+                            </div>
+                            <h2>Almost Ready to Launch!</h2>
+                            <p class="waitlist-subtitle">Claim Scouter is in final testing and will be available soon. Join our exclusive waitlist to be among the first to start recovering your money.</p>
+                        </div>
+
+                        <div class="launch-timeline">
+                            <h3>What to Expect:</h3>
+                            <div class="timeline-item">
+                                <div class="timeline-icon">📋</div>
+                                <div class="timeline-content">
+                                    <strong>Your spot is reserved</strong>
+                                    <span>You're now on our priority waitlist</span>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-icon">🚀</div>
+                                <div class="timeline-content">
+                                    <strong>Launch notification</strong>
+                                    <span>We'll email you the moment we're live</span>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-icon">💰</div>
+                                <div class="timeline-content">
+                                    <strong>Start earning immediately</strong>
+                                    <span>Begin finding claims within 24 hours of launch</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="security-assurance">
+                            <div class="assurance-card">
+                                <i class="fas fa-shield-alt"></i>
+                                <div class="assurance-text">
+                                    <strong>No Payment Required</strong>
+                                    <span>We haven't saved any credit card information. You'll only pay when the product launches.</span>
+                                </div>
+                            </div>
+                            <div class="assurance-card">
+                                <i class="fas fa-clock"></i>
+                                <div class="assurance-text">
+                                    <strong>Early Access Pricing</strong>
+                                    <span>Waitlist members get our launch price: $24/year + 25% success fee with money-back guarantee.</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="button" class="btn btn-primary btn-large" onclick="completeSignup()">
+                            Join the Waitlist
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                    <div class="step-sidebar">
+                        <div class="sidebar-content">
+                            <h3>Launch Benefits</h3>
+                            <div class="launch-benefits">
+                                <div class="benefit-item-mini">
+                                    <i class="fas fa-star"></i>
+                                    <span>Priority access when we launch</span>
+                                </div>
+                                <div class="benefit-item-mini">
+                                    <i class="fas fa-percentage"></i>
+                                    <span>Locked-in launch pricing</span>
+                                </div>
+                                <div class="benefit-item-mini">
+                                    <i class="fas fa-bell"></i>
+                                    <span>Instant launch notification</span>
+                                </div>
+                                <div class="benefit-item-mini">
+                                    <i class="fas fa-gift"></i>
+                                    <span>Potential early-bird bonuses</span>
+                                </div>
+                            </div>
+                            
+                            <div class="waitlist-stats">
+                                <div class="stat-item">
+                                    <div class="stat-number">2,847</div>
+                                    <div class="stat-label">People on waitlist</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-number">Q1 2024</div>
+                                    <div class="stat-label">Expected launch</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Thank You Modal -->
+    <div class="modal-overlay" id="thankYouModal">
+        <div class="modal thank-you-modal">
+            <div class="modal-content">
+                <div class="success-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <h2>You're on the Waitlist! 🎉</h2>
+                <p class="waitlist-confirmation">Thank you for joining Claim Scouter! Your spot is reserved and we're excited to help you recover money you're owed.</p>
+                
+                <div class="confirmation-details">
+                    <div class="confirmation-item">
+                        <i class="fas fa-shield-check"></i>
+                        <div class="confirmation-text">
+                            <strong>No Payment Processed</strong>
+                            <span>We haven't charged you anything. No credit card details were saved.</span>
+                        </div>
+                    </div>
+                    <div class="confirmation-item">
+                        <i class="fas fa-envelope"></i>
+                        <div class="confirmation-text">
+                            <strong>Launch Notification</strong>
+                            <span>We'll email you immediately when Claim Scouter is available.</span>
+                        </div>
+                    </div>
+                    <div class="confirmation-item">
+                        <i class="fas fa-star"></i>
+                        <div class="confirmation-text">
+                            <strong>Early Access Pricing</strong>
+                            <span>You've locked in our launch price: $24/year + 25% success fee.</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="next-steps">
+                    <h3>What happens next:</h3>
+                    <ul>
+                        <li>📧 You'll receive a confirmation email shortly</li>
+                        <li>🚀 We'll notify you the moment we launch (expected Q1 2024)</li>
+                        <li>💰 Start recovering money within 24 hours of launch</li>
+                        <li>🔒 Your spot and pricing are guaranteed</li>
+                    </ul>
+                </div>
+                
+                <div class="social-share">
+                    <p>Know someone else who could benefit? Share Claim Scouter:</p>
+                    <div class="share-buttons">
+                        <button class="share-btn twitter">Share on Twitter</button>
+                        <button class="share-btn facebook">Share on Facebook</button>
+                        <button class="share-btn email">Share via Email</button>
+                    </div>
+                </div>
+                
+                <button class="btn btn-primary btn-large" onclick="closeThankYouModal()">
+                    Perfect! I'll wait for the launch
+                    <i class="fas fa-thumbs-up"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html> 

@@ -1,0 +1,42 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- Compass Star -->
+  <g transform="translate(35, 35)">
+    <!-- Outer compass ring -->
+    <circle cx="0" cy="0" r="25" fill="none" stroke="#667eea" stroke-width="3"/>
+    <circle cx="0" cy="0" r="18" fill="none" stroke="#764ba2" stroke-width="2"/>
+    
+    <!-- Compass star -->
+    <g>
+      <!-- North point -->
+      <polygon points="0,-20 4,-7 0,-3 -4,-7" fill="#2d3748"/>
+      <!-- South point -->
+      <polygon points="0,20 4,7 0,3 -4,7" fill="#2d3748"/>
+      <!-- East point -->
+      <polygon points="20,0 7,4 3,0 7,-4" fill="#2d3748"/>
+      <!-- West point -->
+      <polygon points="-20,0 -7,4 -3,0 -7,-4" fill="#2d3748"/>
+      
+      <!-- Diagonal points -->
+      <polygon points="14.1,-14.1 5,-5 2.5,-7.5 7.5,-2.5" fill="#667eea"/>
+      <polygon points="14.1,14.1 5,5 7.5,2.5 2.5,7.5" fill="#667eea"/>
+      <polygon points="-14.1,14.1 -5,5 -2.5,7.5 -7.5,2.5" fill="#667eea"/>
+      <polygon points="-14.1,-14.1 -5,-5 -7.5,-2.5 -2.5,-7.5" fill="#667eea"/>
+    </g>
+    
+    <!-- Center dot -->
+    <circle cx="0" cy="0" r="2" fill="#1a202c"/>
+  </g>
+  
+  <!-- Magnifying Glass -->
+  <g transform="translate(65, 65)">
+    <!-- Handle -->
+    <rect x="10" y="10" width="16" height="5" rx="2.5" fill="#1a202c" transform="rotate(45 18 12.5)"/>
+    
+    <!-- Glass rim -->
+    <circle cx="0" cy="0" r="12" fill="none" stroke="#1a202c" stroke-width="3"/>
+    <circle cx="0" cy="0" r="10" fill="none" stroke="#2d3748" stroke-width="1"/>
+    
+    <!-- Glass lens -->
+    <circle cx="0" cy="0" r="8" fill="rgba(102, 126, 234, 0.1)"/>
+  </g>
+</svg>
