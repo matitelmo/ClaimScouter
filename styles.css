@@ -18,6 +18,11 @@ body {
     padding: 0 20px;
 }
 
+.container, .value-prop .container {
+    max-width: 100vw;
+    overflow-x: hidden;
+}
+
 /* Typography */
 h1, h2, h3, h4, h5, h6 {
     font-weight: 600;
@@ -93,16 +98,31 @@ p {
 .header {
     position: sticky;
     top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
     background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(10px);
     border-bottom: 1px solid #e2e8f0;
-    z-index: 1000;
+    z-index: 9999;
     padding: 1rem 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+}
+
+@supports not (position: sticky) {
+    .header {
+        position: fixed;
+    }
 }
 
 @media (max-width: 768px) {
     .header {
-        position: relative;
+        position: sticky;
+        top: 0;
+        left: 0;
+        right: 0;
+        width: 100vw;
+        z-index: 9999;
     }
 }
 
@@ -213,6 +233,9 @@ p {
     min-height: 80vh;
     display: flex;
     align-items: center;
+    overflow-x: hidden;
+    width: 100vw;
+    max-width: 100vw;
 }
 
 .hero-content {
@@ -220,6 +243,9 @@ p {
     grid-template-columns: 1fr 1fr;
     gap: 4rem;
     align-items: center;
+    overflow-x: hidden;
+    width: 100%;
+    max-width: 100vw;
 }
 
 .hero-text h1 {
@@ -623,319 +649,248 @@ p {
 /* Trust Bar */
 .trust-bar {
     background: white;
-    padding: 0.25rem 0;
+    padding: 2.5rem 0 2rem 0;
     text-align: center;
     border-bottom: 1px solid #e2e8f0;
     line-height: 1;
     display: flex;
     align-items: center;
     justify-content: center;
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    overscroll-behavior: contain;
     height: auto !important;
-    min-height: unset !important;
-    max-height: unset !important;
 }
 
 .trust-bar .container {
+    max-width: 900px;
+    margin: 0 auto !important;
     padding: 0 !important;
-    margin: 0 !important;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     height: auto !important;
-    min-height: unset !important;
-    max-height: unset !important;
-}
-
-.trust-bar h3 {
-    margin: 0 0 0.25rem 0;
-    font-size: 0.8rem;
+    overflow-x: hidden;
+    overflow-y: hidden;
 }
 
 .trust-logos {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 0.5rem;
-    flex-wrap: wrap;
+    gap: 3rem;
+    flex-wrap: nowrap;
     margin: 0;
     height: auto;
+    padding: 1rem 0 0.5rem 0;
 }
 
 .logo-item {
-    margin: 0;
-    padding: 0;
+    flex: 1 1 0;
+    min-width: 0;
+    max-width: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem 0;
 }
 
 .logo-item svg {
-    width: 80px;
-    height: 28px;
-}
-
-.logo-item:hover {
-    opacity: 1;
-}
-
-.logo-item svg {
+    width: auto;
+    height: 56px;
     max-width: 100%;
-    height: auto;
-    margin: 0;
-    padding: 0;
+    max-height: 56px;
+    object-fit: contain;
     display: block;
 }
 
-/* Trust Bar Responsive */
-@media (max-width: 768px) {
-    .trust-bar {
-        height: 65px;
-        padding: 0;
+@media (max-width: 1024px) {
+    .trust-bar .container {
+        max-width: 98vw;
     }
-    
-    .trust-bar h3 {
-        margin: 0;
-        margin-bottom: 6px;
-        font-size: 0.7rem;
-    }
-    
     .trust-logos {
-        gap: 0.5rem;
-        margin: 0;
-        height: 35px;
-        flex-wrap: wrap;
-    }
-    
-    .logo-item svg {
-        width: 80px;
-        height: 30px;
-    }
-    
-    /* Value Proposition Mobile */
-    .value-prop {
-        padding: 4rem 0;
-    }
-    
-    .value-prop .container {
-        padding: 0 15px;
-    }
-    
-    .value-prop-content {
-        display: flex !important;
-        flex-direction: column !important;
-        grid-template-columns: none !important;
         gap: 2rem;
-        text-align: center;
     }
-    
-    .value-prop-text {
-        text-align: center;
-        width: 100%;
+    .logo-item svg {
+        height: 42px;
+        max-height: 42px;
     }
-    
-    .value-prop h2 {
-        font-size: 2.2rem;
-        line-height: 1.2;
-        margin-bottom: 1rem;
+}
+
+@media (max-width: 768px) {
+    .trust-bar .container {
+        max-width: 100vw;
+        padding: 0 8px !important;
     }
-    
-    .value-prop-description {
-        font-size: 1.1rem;
-        margin-bottom: 2rem;
-        padding: 0 1rem;
-    }
-    
-    .stats-container {
-        justify-content: center;
+    .trust-logos {
+        gap: 1.2rem;
         flex-wrap: wrap;
-        gap: 1rem;
-        margin-top: 1.5rem;
-        margin-bottom: 2rem;
     }
-    
-    .stat-item {
-        min-width: 100px;
-        padding: 1rem 0.8rem;
-        flex: 1;
-        max-width: 110px;
+    .logo-item {
+        min-width: 64px;
+        max-width: 90px;
     }
-    
-    .stat-number {
-        font-size: 1.8rem;
-    }
-    
-    .stat-label {
-        font-size: 0.8rem;
-    }
-    
-    .value-prop-visual {
-        width: 100%;
-        display: flex;
-        justify-content: center;
-    }
-    
-    .chart-container {
-        max-width: 100%;
-        margin: 0 auto;
-        padding: 1.5rem;
-    }
-    
-    .chart-title {
-        font-size: 1rem;
-        margin-bottom: 1.5rem;
-    }
-    
-    .chart {
-        height: 200px;
-        padding: 0 0.5rem;
-    }
-    
-    .chart-bar {
-        width: 60px;
-    }
-    
-    .bar-label {
-        font-size: 0.7rem;
-    }
-    
-    .bar-amount {
-        font-size: 1rem;
-    }
-    
-    .chart-legend {
-        gap: 1rem;
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-    
-    .legend-item {
-        font-size: 0.8rem;
-    }
-    
-    .difference-highlight {
-        padding: 0.75rem 1rem;
-    }
-    
-    .difference-label {
-        font-size: 0.9rem;
-    }
-    
-    .difference-amount {
-        font-size: 1.2rem;
+    .logo-item svg {
+        height: 32px;
+        max-height: 32px;
     }
 }
 
 @media (max-width: 480px) {
+    .trust-bar .container {
+        max-width: 100vw;
+        padding: 0 4px !important;
+    }
     .trust-logos {
-        gap: 1.5rem;
+        gap: 0.7rem;
     }
-    
+    .logo-item {
+        min-width: 40px;
+        max-width: 64px;
+    }
     .logo-item svg {
-        width: 80px;
-        height: 28px;
+        height: 22px;
+        max-height: 22px;
     }
-    
-    /* Value Proposition Small Mobile */
-    .value-prop {
-        padding: 3rem 0;
-    }
-    
-    .value-prop .container {
-        padding: 0 10px;
-    }
-    
+}
+
+/* Value Proposition Mobile */
+.value-prop {
+    padding: 4rem 0;
+}
+
+.value-prop .container {
+    padding: 0 15px;
+}
+
+.value-prop-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 4rem;
+    align-items: center;
+}
+
+@media (max-width: 1024px) {
     .value-prop-content {
-        display: flex !important;
-        flex-direction: column !important;
-        grid-template-columns: none !important;
-        gap: 1.5rem;
+        gap: 2rem;
     }
-    
-    .value-prop h2 {
-        font-size: 1.8rem;
-        line-height: 1.1;
-        margin-bottom: 0.75rem;
-    }
-    
-    .value-prop-description {
-        font-size: 1rem;
-        margin-bottom: 1.5rem;
-        padding: 0 0.5rem;
-    }
-    
-    .stats-container {
-        gap: 0.75rem;
-        margin-top: 1rem;
-        margin-bottom: 1.5rem;
-    }
-    
-    .stat-item {
-        min-width: 80px;
-        padding: 0.75rem 0.5rem;
-        max-width: 90px;
-    }
-    
-    .stat-number {
-        font-size: 1.5rem;
-    }
-    
-    .stat-label {
-        font-size: 0.7rem;
-        line-height: 1.2;
-    }
-    
-    .chart-container {
-        max-width: 100%;
-        padding: 1rem;
-        margin: 0;
-    }
-    
-    .chart-title {
-        font-size: 0.9rem;
-        margin-bottom: 1rem;
-    }
-    
-    .chart {
-        height: 160px;
+}
+
+@media (max-width: 600px) {
+    .value-prop-content {
+        grid-template-columns: 1fr !important;
+        gap: 1.2rem;
         padding: 0;
     }
-    
-    .chart-bar {
-        width: 50px;
+    .value-prop-text {
+        padding: 0 0.5rem;
+        text-align: center;
+        width: 100%;
+        margin-bottom: 1.5rem;
     }
-    
-    .bar-label {
-        font-size: 0.6rem;
-        line-height: 1.1;
+    .value-prop-visual {
+        padding: 0 0.5rem;
+        width: 100%;
+        display: flex;
+        justify-content: center;
     }
-    
-    .bar-amount {
-        font-size: 0.9rem;
-    }
-    
-    .chart-legend {
-        gap: 0.75rem;
-    }
-    
-    .legend-item {
-        font-size: 0.75rem;
-    }
-    
-    .legend-color {
-        width: 10px;
-        height: 10px;
-    }
-    
-    .difference-highlight {
-        padding: 0.5rem 0.75rem;
-    }
-    
-    .difference-label {
-        font-size: 0.8rem;
-    }
-    
-    .difference-amount {
-        font-size: 1.1rem;
-    }
+}
+
+.value-prop-text {
+    text-align: center;
+    width: 100%;
+}
+
+.value-prop h2 {
+    font-size: 2.2rem;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+}
+
+.value-prop-description {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    padding: 0 1rem;
+}
+
+.stats-container {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.stat-item {
+    min-width: 100px;
+    padding: 1rem 0.8rem;
+    flex: 1;
+    max-width: 110px;
+}
+
+.stat-number {
+    font-size: 1.8rem;
+}
+
+.stat-label {
+    font-size: 0.8rem;
+}
+
+.value-prop-visual {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.chart-container {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 1.5rem;
+}
+
+.chart-title {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.chart {
+    height: 200px;
+    padding: 0 0.5rem;
+}
+
+.chart-bar {
+    width: 60px;
+}
+
+.bar-label {
+    font-size: 0.7rem;
+}
+
+.bar-amount {
+    font-size: 1rem;
+}
+
+.chart-legend {
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.legend-item {
+    font-size: 0.8rem;
+}
+
+.difference-highlight {
+    padding: 0.75rem 1rem;
+}
+
+.difference-label {
+    font-size: 0.9rem;
+}
+
+.difference-amount {
+    font-size: 1.2rem;
 }
 
 /* Value Proposition */
