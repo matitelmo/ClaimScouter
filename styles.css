@@ -3623,3 +3623,8 @@ Testing Checklist:
 .about {
   padding-bottom: 0 !important;
 }
+
+/* Center text in Our Story block */
+.about-story {
+  text-align: center;
+}
