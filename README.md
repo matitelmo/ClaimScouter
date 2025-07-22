@@ -1,10 +1,10 @@
-# ClaimCompass Landing Page
+# ClaimScouter Landing Page
 
-A modern, conversion-focused landing page for ClaimCompass - a FinTech service that helps consumers automatically find and file claims for class action settlements they are owed.
+A modern, conversion-focused landing page for ClaimScouter - a FinTech service that helps consumers automatically find and file claims for class action settlements they are owed.
 
 ## 🎯 Overview
 
-This landing page is designed to validate the ClaimCompass business idea by measuring user interest and intent through a comprehensive marketing funnel. The design follows the PRD requirements and captures a modern, trustworthy aesthetic similar to successful FinTech companies like Rocket Money.
+This landing page is designed to validate the ClaimScouter business idea by measuring user interest and intent through a comprehensive marketing funnel. The design follows the PRD requirements and captures a modern, trustworthy aesthetic similar to successful FinTech companies like Rocket Money.
 
 ## ✨ Features
 
@@ -56,7 +56,7 @@ This landing page is designed to validate the ClaimCompass business idea by meas
 
 ### File Structure
 ```
-ClaimCompass/
+ClaimScouter/
 ├── index.html          # Main landing page
 ├── styles.css          # All styling and responsive design
 ├── script.js           # JavaScript functionality

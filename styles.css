@@ -3469,3 +3469,117 @@ Testing Checklist:
     gap: 1rem;
   }
 }
+
+/* Hero Trust Bar styles */
+.hero-trust-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+  margin: 1.25rem 0 0.5rem 0;
+  padding: 0.75rem 1rem;
+  background: none;
+}
+.hero-trust-bar .trust-item {
+  display: flex;
+  align-items: center;
+  color: #888;
+  font-size: 0.95rem;
+  font-weight: 500;
+  gap: 0.5rem;
+  letter-spacing: 0.01em;
+}
+.hero-trust-bar .trust-item i {
+  font-size: 1rem;
+  color: #888;
+  margin-right: 0.4em;
+}
+@media (max-width: 700px) {
+  .hero-trust-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+    padding: 0.5rem 0.5rem;
+  }
+  .hero-trust-bar .trust-item {
+    font-size: 0.92rem;
+  }
+}
+
+/* Easy Steps Grid styles for How It Works replacement */
+.easy-steps-grid {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  gap: 2rem;
+  margin-top: 2rem;
+  margin-bottom: 1.5rem;
+}
+.easy-step {
+  flex: 1 1 0;
+  background: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 1.5rem 1rem 1.25rem 1rem;
+}
+.easy-step-icon {
+  font-size: 2.5rem;
+  color: #667;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.easy-step h3 {
+  font-size: 1.18rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #222;
+}
+.easy-step p {
+  font-size: 1rem;
+  color: #555;
+  margin: 0;
+}
+@media (max-width: 900px) {
+  .easy-steps-grid {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  .easy-step {
+    padding: 1.25rem 0.5rem 1rem 0.5rem;
+  }
+  .easy-step-icon {
+    font-size: 2rem;
+  }
+}
+
+/* Testimonial avatar image styles */
+.testimonial-author .avatar img {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #e0e0e0;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  display: block;
+  margin: 0 auto;
+  background: #f8f8f8;
+}
+.testimonial-author .avatar {
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 1rem;
+}
+@media (max-width: 700px) {
+  .testimonial-author .avatar,
+  .testimonial-author .avatar img {
+    width: 44px;
+    height: 44px;
+  }
+}

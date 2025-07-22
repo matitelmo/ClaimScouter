@@ -1,0 +1,58 @@
+Product Deep Dive: ClaimScouter
+1. The Core Problem We Solve
+
+Every year, companies settle class action lawsuits for billions of dollars over issues like data breaches, faulty products, or false advertising. The money from these settlements is legally owed to affected consumers. However, the system for claiming this money is broken. Billions of dollars go unclaimed because:
+
+Lack of Awareness: Most people never even hear about the settlements they qualify for.
+
+Complexity and Hassle: Finding eligibility requirements and filling out claim forms is tedious, confusing, and time-consuming.
+
+Small Individual Payouts: A potential payout of $15 or $30 often doesn't feel worth the effort of digging up old receipts and navigating legal websites.
+
+As a result, consumers leave a significant amount of their own money on the table, which often reverts back to the defendant company or is distributed elsewhere.
+
+2. Our Solution: An Automated Advocate
+
+ClaimScouter is a "set it and forget it" service that acts as a personal advocate for the consumer. It completely automates the process of finding and claiming settlement money.
+
+Our core function is to monitor a user's past and future purchases against a comprehensive database of active class action settlements. When our system finds a match, it automatically handles the entire claim filing process on the user's behalf. We turn a complex, manual task into a passive income stream for our users.
+
+3. The User Journey: From Signup to Payout
+
+This is the step-by-step experience we provide to the user:
+
+Step 1: Simple Onboarding: A user creates a secure account with their name and email.
+
+Step 2: Securely Connecting Data (The "Magic"): This is the most critical part of the service. To find claims, we need to see a user's purchase history. We do this in two secure, read-only ways:
+
+Email Connection (for Receipts): The user connects their Gmail or Outlook account via a secure OAuth process. Our system then scans their inbox only for transactional emails and digital receipts from merchants.
+
+Bank Connection (for Transactions): The user connects their primary bank or credit card accounts via the Plaid API. This is the industry standard for FinTech apps. Crucially, this means ClaimScouter never sees, handles, or stores the user's bank login credentials. The connection is read-only and allows our system to see transaction data (merchant name, date, amount) to match against settlement criteria.
+
+Step 3: Passive Monitoring: Once connected, the user doesn't need to do anything. Our engine works continuously in the background, cross-referencing their historical and ongoing transaction data against our settlement database.
+
+Step 4: Discovery & One-Click Approval: When our system finds a settlement the user is eligible for, we send them a simple notification (e.g., "We found a potential claim for you from the 2023 MegaCorp Data Breach settlement, estimated at $25."). The user simply has to click "Approve Filing," and our system takes over.
+
+Step 5: Automated Filing: Our Robotic Process Automation (RPA) bots navigate to the official settlement website, fill out the claim form with the user's information, and submit it with any required proof (like a transaction ID we found).
+
+Step 6: Getting Paid: Months later, when the settlement administrator distributes the funds, the payment is routed through ClaimScouter. We automatically deduct our success fee and deposit the remaining balance directly into the user's preferred payout account (e.g., direct deposit or PayPal). The user receives a final notification: "$18.75 is on its way to your account!"
+
+4. The Business Model: A True Partnership
+
+Our model is designed to be completely risk-free and align our success with our users' success.
+
+No Upfront Costs: There are no subscription fees, monthly charges, or hidden costs.
+
+Success-Based Fee: We charge a 25% commission on the money we successfully recover for the user.
+
+The Guarantee: If we don't find any money for you, you pay absolutely nothing. We only get paid when you do.
+
+5. Core Value Propositions to Emphasize
+
+Effortless: We automate a complex, time-consuming process. It's a true "set it and forget it" service.
+
+Secure: We use bank-level encryption and industry-standard tools like Plaid to ensure user data is always safe. We never see or store banking passwords.
+
+Maximizes Payouts: We find claims users would never have known about, ensuring they get all the money they're owed.
+
+Completely Risk-Free: Our success-based fee means there is no downside for the user.
