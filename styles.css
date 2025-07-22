@@ -654,9 +654,9 @@ p {
     text-align: center;
     border-bottom: 1px solid #e2e8f0;
     line-height: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    /* Remove flex centering */
+    display: block;
+    width: 100%;
     overflow-x: hidden;
     overflow-y: hidden;
     overscroll-behavior: contain;
@@ -676,9 +676,10 @@ p {
     overflow-y: hidden;
 }
 
+/* Desktop: 5 columns */
 .trust-logos {
     display: grid;
-    grid-template-columns: repeat(5, 1fr); /* 5 columns for 5 logos */
+    grid-template-columns: repeat(5, 1fr);
     gap: 2rem;
     width: 100%;
     align-items: center;
@@ -704,15 +705,9 @@ p {
     display: block;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 900px), (max-width: 600px) {
     .trust-logos {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1.5rem;
-    }
-}
-@media (max-width: 600px) {
-    .trust-logos {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(5, 1fr);
         gap: 1rem;
     }
 }
