@@ -3378,52 +3378,26 @@ Testing Checklist:
 .footer-badges {
     display: flex;
     justify-content: center;
-    gap: 1rem;
-    margin-bottom: 1rem;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+    padding: 0;
 }
 .footer-badges img {
-    height: 28px;
+    height: 20px;
+    margin: 0;
 }
-
-/* Footer Company Info */
 .footer-company-info {
-    margin-top: 2rem;
-    font-size: 0.95rem;
+    margin-top: 1rem;
+    font-size: 0.85rem;
     color: #a0aec0;
     text-align: center;
+    line-height: 1.4;
 }
 .footer-company-info a {
     color: #a0aec0;
     text-decoration: underline;
+    font-size: 0.85rem;
 }
 .footer-company-info a:hover {
     color: #fff;
-}
-
-/* About Team Section */
-.about-team {
-    text-align: center;
-    padding: 3rem 0 2rem 0;
-    background: #f7fafc;
-}
-.team-members {
-    display: flex;
-    justify-content: center;
-    gap: 2rem;
-    flex-wrap: wrap;
-    margin-top: 1.5rem;
-}
-.team-member {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    max-width: 160px;
-}
-.team-photo {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    margin-bottom: 0.75rem;
-    object-fit: cover;
-    border: 2px solid #667eea;
 }
