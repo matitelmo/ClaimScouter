@@ -3357,3 +3357,73 @@ Testing Checklist:
 □ Accessibility features work
 ===========================================
 */
+
+/* Hero Trust Message */
+.hero-trust {
+    background: #f7fafc;
+    padding: 2rem 0 1rem 0;
+    text-align: center;
+}
+.trust-message {
+    font-size: 1.2rem;
+    color: #2d3748;
+    margin-bottom: 0.5rem;
+}
+.trust-message .highlight {
+    color: #667eea;
+    font-weight: bold;
+}
+
+/* Footer Badges */
+.footer-badges {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+.footer-badges img {
+    height: 28px;
+}
+
+/* Footer Company Info */
+.footer-company-info {
+    margin-top: 2rem;
+    font-size: 0.95rem;
+    color: #a0aec0;
+    text-align: center;
+}
+.footer-company-info a {
+    color: #a0aec0;
+    text-decoration: underline;
+}
+.footer-company-info a:hover {
+    color: #fff;
+}
+
+/* About Team Section */
+.about-team {
+    text-align: center;
+    padding: 3rem 0 2rem 0;
+    background: #f7fafc;
+}
+.team-members {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+    margin-top: 1.5rem;
+}
+.team-member {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 160px;
+}
+.team-photo {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-bottom: 0.75rem;
+    object-fit: cover;
+    border: 2px solid #667eea;
+}
