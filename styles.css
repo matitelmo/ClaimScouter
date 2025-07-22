@@ -3583,3 +3583,43 @@ Testing Checklist:
     height: 44px;
   }
 }
+
+/* Center and spread out mission-stats and team-values */
+.mission-stats, .team-values {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  gap: 2.5rem;
+  margin: 2rem 0 1.5rem 0;
+  width: 100%;
+}
+.mission-stats .stat-item, .team-values .value-item {
+  flex: 1 1 0;
+  max-width: 320px;
+  min-width: 180px;
+  background: #fafbfc;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+  padding: 1.5rem 1rem 1.25rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin: 0;
+}
+@media (max-width: 900px) {
+  .mission-stats, .team-values {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
+  }
+  .mission-stats .stat-item, .team-values .value-item {
+    max-width: 100%;
+    width: 100%;
+  }
+}
+
+/* Reduce bottom padding of about section */
+.about {
+  padding-bottom: 0 !important;
+}
