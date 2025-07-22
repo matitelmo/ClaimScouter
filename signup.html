@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete Your Signup | Claim Scouter</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="signup-container" style="max-width: 420px; margin: 4rem auto; text-align: center;">
+        <h1>Complete Your Signup</h1>
+        <p>To see your claim details and get paid, please link your account with Stripe.</p>
+        <button class="btn btn-primary btn-large" id="stripeLinkBtn" style="margin-top:2rem;">Link with Stripe</button>
+    </div>
+    <script>
+    document.getElementById('stripeLinkBtn').onclick = function() {
+        window.location.href = 'final.html';
+    };
+    </script>
+</body>
+</html> 

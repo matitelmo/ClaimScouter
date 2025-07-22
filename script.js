@@ -175,499 +175,61 @@ function handleEmailSubmission() {
     }
 }
 
+function openUserFunnelModal() {
+    const modal = document.getElementById('userFunnelModal');
+    if (modal) {
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        showFunnelStep(1);
+    }
+}
+window.openUserFunnelModal = openUserFunnelModal;
+
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('DOM loaded, initializing...');
-    console.log('Window functions available:', {
-        openOnboardingModal: typeof window.openOnboardingModal,
-        closeOnboardingModal: typeof window.closeOnboardingModal,
-        nextStep: typeof window.nextStep
-    });
-    
-    // Handle logo image loading
-    const logoImage = document.querySelector('.logo-image');
-    const logoFallback = document.querySelector('.logo-fallback');
-    
-    if (logoImage && logoFallback) {
-        logoImage.addEventListener('error', function() {
-            console.log('Logo image failed to load, showing fallback');
-            this.style.display = 'none';
-            logoFallback.style.display = 'flex';
-        });
-        
-        logoImage.addEventListener('load', function() {
-            console.log('Logo image loaded successfully');
-            logoFallback.style.display = 'none';
-        });
-        
-        // Check if image is already loaded or failed
-        if (logoImage.complete) {
-            if (logoImage.naturalWidth === 0) {
-                logoImage.style.display = 'none';
-                logoFallback.style.display = 'flex';
-            }
-        }
-    }
-    
-    // Initialize email form handling
-    handleEmailSubmission();
-    
-    // Close modals when clicking outside
-    const modals = document.querySelectorAll('.modal-overlay');
-    modals.forEach(modal => {
-        modal.addEventListener('click', function(e) {
-            if (e.target === modal) {
-                modal.classList.remove('active');
-                document.body.style.overflow = 'auto';
-                if (modal.id === 'onboardingModal') {
-                    resetModal();
-                }
-            }
-        });
-    });
-    
-    // Handle payout method selection
-    const payoutCards = document.querySelectorAll('.payout-card');
-    payoutCards.forEach(card => {
-        card.addEventListener('click', function() {
-            // Remove selection from all cards
-            payoutCards.forEach(c => c.style.borderColor = '#e2e8f0');
-            
-            // Select clicked card
-            this.style.borderColor = '#667eea';
-            
-            // Check the radio button
-            const radio = this.querySelector('input[type="radio"]');
-            if (radio) {
-                radio.checked = true;
-            }
-        });
-    });
-    
-    // Handle connection card interactions
-    const connectionCards = document.querySelectorAll('.connection-card');
-    connectionCards.forEach(card => {
-        const connectBtn = card.querySelector('.btn-outline');
-        if (connectBtn) {
-            connectBtn.addEventListener('click', function(e) {
-                e.stopPropagation();
-                
-                // Simulate connection process
-                const originalText = this.textContent;
-                this.textContent = 'Connecting...';
-                this.disabled = true;
-                
-                setTimeout(() => {
-                    this.textContent = 'Connected ✓';
-                    this.style.background = '#38a169';
-                    this.style.color = 'white';
-                    this.style.borderColor = '#38a169';
-                }, 2000);
-            });
-        }
-    });
-    
-    // Smooth scrolling for navigation links
-    const navLinks = document.querySelectorAll('a[href^="#"]');
-    navLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
+    // Hero form submit triggers funnel modal
+    const heroForm = document.getElementById('emailForm');
+    if (heroForm) {
+        heroForm.addEventListener('submit', function(e) {
             e.preventDefault();
-            const targetId = this.getAttribute('href');
-            const targetElement = document.querySelector(targetId);
-            
-            if (targetElement) {
-                targetElement.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-            }
-        });
-    });
-    
-    // Enhanced Mobile menu toggle
-    const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
-    const nav = document.querySelector('.nav');
-    const header = document.querySelector('.header');
-
-    if (mobileMenuToggle && nav) {
-        mobileMenuToggle.addEventListener('click', function(e) {
-            e.stopPropagation();
-            nav.classList.toggle('active');
-            
-            // Update toggle icon
-            const icon = this.querySelector('i');
-            if (nav.classList.contains('active')) {
-                icon.className = 'fas fa-times';
-                this.setAttribute('aria-expanded', 'true');
+            const emailInput = heroForm.querySelector('input[type="email"]');
+            const email = emailInput ? emailInput.value.trim() : '';
+            if (email && email.includes('@')) {
+                localStorage.setItem('userEmail', email);
+                openUserFunnelModal();
             } else {
-                icon.className = 'fas fa-bars';
-                this.setAttribute('aria-expanded', 'false');
-            }
-        });
-        
-        // Close menu when clicking outside
-        document.addEventListener('click', function(e) {
-            if (!header.contains(e.target) && nav.classList.contains('active')) {
-                nav.classList.remove('active');
-                const icon = mobileMenuToggle.querySelector('i');
-                icon.className = 'fas fa-bars';
-                mobileMenuToggle.setAttribute('aria-expanded', 'false');
-            }
-        });
-        
-        // Close menu when clicking on nav links
-        nav.addEventListener('click', function(e) {
-            if (e.target.tagName === 'A') {
-                nav.classList.remove('active');
-                const icon = mobileMenuToggle.querySelector('i');
-                icon.className = 'fas fa-bars';
-                mobileMenuToggle.setAttribute('aria-expanded', 'false');
-            }
-        });
-        
-        // Close menu on escape key
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape' && nav.classList.contains('active')) {
-                nav.classList.remove('active');
-                const icon = mobileMenuToggle.querySelector('i');
-                icon.className = 'fas fa-bars';
-                mobileMenuToggle.setAttribute('aria-expanded', 'false');
+                alert('Please enter a valid email address');
             }
         });
     }
-
-    // Enhanced responsive behavior
-    function handleResize() {
-        const windowWidth = window.innerWidth;
-        
-        // Close mobile menu on resize to desktop
-        if (windowWidth > 768 && nav && nav.classList.contains('active')) {
-            nav.classList.remove('active');
-            const icon = mobileMenuToggle?.querySelector('i');
-            if (icon) {
-                icon.className = 'fas fa-bars';
-                mobileMenuToggle.setAttribute('aria-expanded', 'false');
-            }
-        }
-        
-        // Adjust modal size on very small screens
-        const modals = document.querySelectorAll('.modal');
-        modals.forEach(modal => {
-            if (windowWidth <= 480) {
-                modal.style.width = '95%';
-                modal.style.margin = '0.5rem';
-            } else if (windowWidth <= 768) {
-                modal.style.width = '90%';
-                modal.style.margin = '1rem';
+    // Name capture step
+    const nameForm = document.getElementById('nameCaptureForm');
+    if (nameForm) {
+        nameForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const nameInput = document.getElementById('fullName');
+            const name = nameInput ? nameInput.value.trim() : '';
+            if (name.length > 1) {
+                localStorage.setItem('userName', name);
+                showFunnelStep(2);
+                setTimeout(() => showFunnelStep(3), 3500);
             } else {
-                modal.style.width = '';
-                modal.style.margin = '';
+                alert('Please enter your full name');
             }
         });
     }
-
-    // Debounced resize handler
-    let resizeTimeout;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimeout);
-        resizeTimeout = setTimeout(handleResize, 250);
-    });
-
-    // Initial call
-    handleResize();
-
-    // Touch-friendly enhancements
-    function addTouchEnhancements() {
-        // Add touch feedback to buttons
-        const buttons = document.querySelectorAll('.btn, .carousel-btn, .faq-question');
-        
-        buttons.forEach(button => {
-            button.addEventListener('touchstart', function() {
-                this.style.transform = 'scale(0.98)';
-            });
-            
-            button.addEventListener('touchend', function() {
-                setTimeout(() => {
-                    this.style.transform = '';
-                }, 100);
-            });
-        });
-        
-        // Smooth scrolling for anchor links
-        const anchorLinks = document.querySelectorAll('a[href^="#"]');
-        anchorLinks.forEach(link => {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    const headerHeight = header?.offsetHeight || 0;
-                    const trustBarHeight = document.querySelector('.trust-bar')?.offsetHeight || 0;
-                    const offset = headerHeight + trustBarHeight + 20;
-                    
-                    window.scrollTo({
-                        top: target.offsetTop - offset,
-                        behavior: 'smooth'
-                    });
-                }
-            });
+    // Blurred results step: go to Stripe link step
+    const toStripeBtn = document.getElementById('toStripeBtn');
+    if (toStripeBtn) {
+        toStripeBtn.addEventListener('click', function() {
+            showFunnelStep(4);
         });
     }
-
-    // Initialize touch enhancements when DOM is ready
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', addTouchEnhancements);
-    } else {
-        addTouchEnhancements();
-    }
-    
-    // Add loading states to buttons
-    const buttons = document.querySelectorAll('.btn');
-    buttons.forEach(button => {
-        button.addEventListener('click', function() {
-            if (!this.classList.contains('btn-outline')) {
-                const originalText = this.textContent;
-                this.textContent = 'Loading...';
-                this.disabled = true;
-                
-                setTimeout(() => {
-                    this.textContent = originalText;
-                    this.disabled = false;
-                }, 1000);
-            }
+    // Stripe link step: go to confirmation
+    const stripeLinkBtn = document.getElementById('stripeLinkBtn');
+    if (stripeLinkBtn) {
+        stripeLinkBtn.addEventListener('click', function() {
+            showFunnelStep(5);
         });
-    });
-    
-    // Form validation
-    const forms = document.querySelectorAll('form');
-    forms.forEach(form => {
-        form.addEventListener('submit', function(e) {
-            const requiredFields = form.querySelectorAll('[required]');
-            let isValid = true;
-            
-            requiredFields.forEach(field => {
-                if (!field.value.trim()) {
-                    isValid = false;
-                    field.style.borderColor = '#e53e3e';
-                } else {
-                    field.style.borderColor = '#e2e8f0';
-                }
-            });
-            
-            if (!isValid) {
-                e.preventDefault();
-                alert('Please fill in all required fields.');
-            }
-        });
-    });
-    
-    // Add animation on scroll
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
-    
-    const observer = new IntersectionObserver(function(entries) {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-            }
-        });
-    }, observerOptions);
-    
-    // Observe elements for animation
-    const animateElements = document.querySelectorAll('.step-card, .testimonial-card, .hero-text, .hero-visual');
-    animateElements.forEach(el => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(20px)';
-        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-        observer.observe(el);
-    });
-    
-    // Pre-fill email from localStorage if available
-    const storedEmail = localStorage.getItem('userEmail');
-    if (storedEmail) {
-        const emailInputs = document.querySelectorAll('input[type="email"]');
-        emailInputs.forEach(input => {
-            if (!input.value) {
-                input.value = storedEmail;
-            }
-        });
-    }
-    
-    // FAQ functionality
-    console.log('Initializing FAQ functionality...');
-    const faqCategories = document.querySelectorAll('.faq-category');
-    const faqSections = document.querySelectorAll('.faq-section');
-    const faqItems = document.querySelectorAll('.faq-item');
-    const faqSearch = document.getElementById('faqSearch');
-    
-    console.log('Found FAQ elements:', {
-        categories: faqCategories.length,
-        sections: faqSections.length,
-        items: faqItems.length
-    });
-    
-    // FAQ category switching
-    faqCategories.forEach(category => {
-        category.addEventListener('click', function() {
-            const targetCategory = this.getAttribute('data-category');
-            console.log('FAQ category clicked:', targetCategory);
-            
-            // Update active category button
-            faqCategories.forEach(c => c.classList.remove('active'));
-            this.classList.add('active');
-            
-            // Show target section
-            faqSections.forEach(section => {
-                section.classList.remove('active');
-                if (section.getAttribute('data-category') === targetCategory) {
-                    section.classList.add('active');
-                }
-            });
-        });
-    });
-    
-    // FAQ item toggle
-    faqItems.forEach(item => {
-        const question = item.querySelector('.faq-question');
-        if (question) {
-            question.addEventListener('click', function() {
-                console.log('FAQ item clicked');
-                const isActive = item.classList.contains('active');
-                
-                // Close all other items
-                faqItems.forEach(otherItem => {
-                    otherItem.classList.remove('active');
-                });
-                
-                // Toggle current item
-                if (!isActive) {
-                    item.classList.add('active');
-                    console.log('FAQ item opened');
-                } else {
-                    console.log('FAQ item closed');
-                }
-            });
-        }
-    });
-    
-    // FAQ search functionality
-    if (faqSearch) {
-        faqSearch.addEventListener('input', function() {
-            const searchTerm = this.value.toLowerCase();
-            const allFaqItems = document.querySelectorAll('.faq-item');
-            
-            allFaqItems.forEach(item => {
-                const question = item.querySelector('.faq-question h3').textContent.toLowerCase();
-                const answer = item.querySelector('.faq-answer p').textContent.toLowerCase();
-                
-                if (question.includes(searchTerm) || answer.includes(searchTerm)) {
-                    item.style.display = 'block';
-                } else {
-                    item.style.display = 'none';
-                }
-            });
-            
-            // Show all sections when searching
-            if (searchTerm) {
-                faqSections.forEach(section => {
-                    section.classList.add('active');
-                });
-                faqCategories.forEach(cat => cat.classList.remove('active'));
-            } else {
-                // Reset to default state
-                faqSections.forEach(section => {
-                    section.classList.remove('active');
-                });
-                faqCategories[0].classList.add('active');
-                faqSections[0].classList.add('active');
-                allFaqItems.forEach(item => {
-                    item.style.display = 'block';
-                });
-                         }
-         });
-     }
-    
-    // Initialize carousel
-    initializeCarousel();
-    
-    // Test button functionality
-    const testButtons = document.querySelectorAll('button[onclick*="openOnboardingModal"]');
-    console.log('Found', testButtons.length, 'modal trigger buttons');
-    
-    // Add click event listeners as backup
-    testButtons.forEach(button => {
-        button.addEventListener('click', function(e) {
-            console.log('Button clicked, opening modal...');
-            window.openOnboardingModal();
-        });
-    });
-    
-    // Special handling for email form button - try multiple selectors
-    let emailFormButton = document.querySelector('#emailForm button[type="submit"]');
-    if (!emailFormButton) {
-        emailFormButton = document.querySelector('.email-form button');
-    }
-    if (!emailFormButton) {
-        emailFormButton = document.querySelector('form button[type="submit"]');
-    }
-    
-    console.log('Email form button found:', emailFormButton);
-    console.log('Email form found:', document.querySelector('#emailForm'));
-    
-    if (emailFormButton) {
-        // Remove any existing event listeners by cloning the button
-        const newButton = emailFormButton.cloneNode(true);
-        emailFormButton.parentNode.replaceChild(newButton, emailFormButton);
-        emailFormButton = newButton;
-        
-        emailFormButton.addEventListener('click', function(e) {
-            console.log('Email form button clicked - preventing default');
-            e.preventDefault(); // Always prevent form submission
-            e.stopPropagation();
-            
-            const form = this.closest('form') || document.querySelector('#emailForm');
-            if (form) {
-                const emailInput = form.querySelector('input[type="email"]');
-                const email = emailInput ? emailInput.value.trim() : '';
-                console.log('Email from form:', email);
-                
-                if (email && email.includes('@')) {
-                    console.log('Valid email, storing and opening modal');
-                    localStorage.setItem('userEmail', email);
-                    
-                    // Check if modal function exists
-                    if (typeof window.openOnboardingModal === 'function') {
-                        console.log('Opening modal function exists, calling it');
-                        window.openOnboardingModal();
-                    } else {
-                        console.error('openOnboardingModal function not found');
-                    }
-                    
-                    setTimeout(() => {
-                        const modalEmailInput = document.querySelector('#step1 input[type="email"]');
-                        if (modalEmailInput) {
-                            modalEmailInput.value = email;
-                            console.log('Pre-filled email in modal');
-                        }
-                    }, 200);
-                } else {
-                    console.log('Invalid email or empty:', email);
-                    alert('Please enter a valid email address');
-                }
-            } else {
-                console.error('Form not found');
-            }
-        });
-        console.log('Email form button event listener added');
-    } else {
-        console.error('Email form button not found with any selector');
-        
-        // Try to find it with a timeout
-        setTimeout(() => {
-            const delayedButton = document.querySelector('#emailForm button[type="submit"]');
-            console.log('Delayed search for button:', delayedButton);
-        }, 1000);
     }
 });
 
@@ -884,6 +446,32 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 }); 
+
+// --- New User Funnel Logic ---
+function closeUserFunnelModal() {
+    const modal = document.getElementById('userFunnelModal');
+    if (modal) {
+        modal.classList.remove('active');
+        document.body.style.overflow = 'auto';
+        resetFunnelModal();
+    }
+}
+function showFunnelStep(step) {
+    const steps = [1,2,3,4,5];
+    steps.forEach(s => {
+        const el = document.getElementById(`funnelStep${s}`);
+        if (el) el.style.display = 'none';
+    });
+    const current = document.getElementById(`funnelStep${step}`);
+    if (current) current.style.display = 'block';
+}
+function resetFunnelModal() {
+    showFunnelStep(1);
+    const nameInput = document.getElementById('fullName');
+    if (nameInput) nameInput.value = '';
+}
+// Make modal globally accessible for close button
+window.closeUserFunnelModal = closeUserFunnelModal;
 
 // Backup FAQ initialization
 function initializeFAQ() {

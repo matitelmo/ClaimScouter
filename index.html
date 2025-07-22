@@ -20,6 +20,7 @@
                     <div class="logo-fallback">🧭🔍</div>
                 </div>
                 <span class="logo-text">Claim Scouter</span>
+                
             </div>
                 <nav class="nav">
                     <a href="#how-it-works">How It Works</a>
@@ -28,7 +29,7 @@
                     <a href="#faq">FAQ</a>
                 </nav>
                 <div class="header-cta">
-                    <button class="btn btn-primary" onclick="openOnboardingModal()">Get Started</button>
+                    <button class="btn btn-primary" onclick="openUserFunnelModal()">Get Started</button>
                 </div>
                 <button class="mobile-menu-toggle" aria-label="Toggle mobile menu" aria-expanded="false">
                     <i class="fas fa-bars"></i>
@@ -47,7 +48,7 @@
                     <form class="email-form" id="emailForm">
                         <div class="form-group">
                             <input type="email" placeholder="Enter your email address" required>
-                            <button type="submit" class="btn btn-primary" onclick="handleHeroEmailSubmit(event)">Get Started</button>
+                            <button type="submit" class="btn btn-primary" id="heroCtaBtn">Check Your Settlements</button>
                         </div>
                     </form>
                     <!-- Trust Bar: Responsive, subtle, flexbox-based -->
@@ -438,7 +439,7 @@
                             <span>You Keep 75% of All Recoveries</span>
                         </div>
                     </div>
-                    <button class="btn btn-primary btn-large" onclick="openOnboardingModal()">Get Started</button>
+                    <button class="btn btn-primary btn-large" onclick="openUserFunnelModal()">Get Started</button>
                 </div>
             </div>
             <div class="pricing-faq">
@@ -796,11 +797,11 @@
                         <h3>Our Story</h3>
                         <p>Claim Scouter was founded when our team discovered that billions of dollars in settlement money goes unclaimed every year simply because people don't know they're eligible. We realized that with the right technology, we could automatically find and file these claims for people.</p>
                         <p>Since launching, we've helped over 10,000 users recover more than $2.5 million in unclaimed money from settlements they never knew existed.</p>
-                    </div>
-                    <div class="about-team">
-                        <h3>Our Team</h3>
+                </div>
+                <div class="about-team">
+                    <h3>Our Team</h3>
                         <p>We believe everyone deserves to get the money they're owed. Our automated platform does the hard work of finding eligible claims and filing the paperwork, so you don't have to. We're a team of engineers, legal experts, and consumer advocates who are passionate about helping people get the money they deserve. Our backgrounds span fintech, legal services, and consumer protection.</p>
-                    </div>
+                        </div>
                 </div>
             </div>
         </div>
@@ -884,7 +885,7 @@
                         <div class="learn-cta">
                             <h4>Stay Updated</h4>
                             <p>Get notified when new settlements become available</p>
-                            <button class="btn btn-primary" onclick="openOnboardingModal()">Join Claim Scouter</button>
+                            <button class="btn btn-primary" onclick="openUserFunnelModal()">Join Claim Scouter</button>
                         </div>
                     </div>
                 </div>
@@ -898,7 +899,7 @@
             <div class="footer-content">
                 <div class="footer-cta">
                                                 <h2>Ready to Find Your Money?</h2>
-                    <button class="btn btn-primary btn-large" onclick="openOnboardingModal()">Get Started</button>
+                    <button class="btn btn-primary btn-large" onclick="openUserFunnelModal()">Get Started</button>
                 </div>
                 <div class="footer-links">
                     <div class="link-group">
@@ -924,290 +925,114 @@
         </button>
     </footer>
 
-    <!-- Multi-Step Onboarding Modal -->
-    <div class="modal-overlay" id="onboardingModal">
+    <!-- Multi-Step User Funnel Modal -->
+    <div class="modal-overlay" id="userFunnelModal">
         <div class="modal">
             <div class="modal-header">
-                <button class="modal-close" onclick="closeOnboardingModal()">
+                <button class="modal-close" onclick="closeUserFunnelModal()">
                     <i class="fas fa-times"></i>
                 </button>
-                <div class="progress-bar">
-                    <div class="progress-step active" data-step="1">1</div>
-                    <div class="progress-step" data-step="2">2</div>
-                    <div class="progress-step" data-step="3">3</div>
-                    <div class="progress-step" data-step="4">4</div>
-                </div>
             </div>
-            
             <div class="modal-content">
-                <!-- Step 1: Create Account -->
-                <div class="modal-step active" id="step1">
-                    <div class="step-content">
-                        <div class="step-header">
-                            <h2>Welcome! Let's Get Started</h2>
-                            <p class="step-description">Create your secure account to start finding money you're owed. Our platform has already helped users recover over $2.4 million in unclaimed settlements.</p>
-                        </div>
-                        
-                        <div class="benefits-list">
-                            <div class="benefit-item">
-                                <div class="benefit-icon">🔒</div>
-                                <div class="benefit-text">
-                                    <strong>Bank-level security</strong>
-                                    <span>Your data is protected with AES-256 encryption</span>
-                                </div>
-                            </div>
-                            <div class="benefit-item">
-                                <div class="benefit-icon">⚡</div>
-                                <div class="benefit-text">
-                                    <strong>Quick setup</strong>
-                                    <span>Takes less than 2 minutes to get started</span>
-                                </div>
-                            </div>
-                            <div class="benefit-item">
-                                <div class="benefit-icon">💰</div>
-                                <div class="benefit-text">
-                                    <strong>Average recovery: $150+</strong>
-                                    <span>Most users find multiple claims worth $50-300</span>
-                                </div>
+                <!-- Step 1: Name Capture -->
+                <div class="modal-step" id="funnelStep1">
+                    <h2>Let's Get Started</h2>
+                    <p class="modal-desc">Create your secure account to start finding money you're owed. Our platform has already helped users recover over $2.5 million in unclaimed settlements.</p>
+                    <div class="benefits-list">
+                        <div class="benefit-item">
+                            <div class="benefit-icon">🔒</div>
+                            <div class="benefit-text">
+                                <strong>Secure</strong>
+                                <span>Protected with AES-256 encryption</span>
                             </div>
                         </div>
-                        
-                        <form class="step-form">
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <label>Full Name</label>
-                                    <input type="text" placeholder="Enter your full name" required>
-                                </div>
-                                <div class="form-group">
-                                    <label>Email Address</label>
-                                    <input type="email" placeholder="Enter your email" required>
-                                </div>
+                        <div class="benefit-item">
+                            <div class="benefit-icon">⚡</div>
+                            <div class="benefit-text">
+                                <strong>Quick setup</strong>
+                                <span>Takes less than 2 minutes to get started</span>
                             </div>
-                            <div class="form-footer">
-                                <p class="privacy-note">
-                                    <i class="fas fa-shield-alt"></i>
-                                    We never sell your data. Read our <a href="#privacy" style="color: #667eea;">Privacy Policy</a>.
-                                </p>
-                                <button type="button" class="btn btn-primary btn-large" onclick="nextStep(2)">
-                                    Continue to Account Setup
-                                    <i class="fas fa-arrow-right"></i>
-                                </button>
+                        </div>
+                        <div class="benefit-item">
+                            <div class="benefit-icon">💰</div>
+                            <div class="benefit-text">
+                                <strong>Get Paid</strong>
+                                <span>Most users find multiple claims worth $50-300</span>
                             </div>
-                        </form>
+                        </div>
                     </div>
-                    <div class="step-sidebar">
-                        <div class="sidebar-content">
-                            <h3>Why Choose Claim Scouter?</h3>
-                            <div class="testimonial-mini">
-                                <p>"The signup was surprisingly fast. I was done in less than two minutes and they found my first claim within a week."</p>
-                                <span>- Jessica S., Marketing Consultant</span>
-                            </div>
-                            
-                            <div class="stats-mini">
-                                <div class="stat-item">
-                                    <div class="stat-number">$2.4M+</div>
-                                    <div class="stat-label">Recovered for users</div>
-                                </div>
-                                <div class="stat-item">
-                                    <div class="stat-number">10,000+</div>
-                                    <div class="stat-label">Active members</div>
-                                </div>
-                                <div class="stat-item">
-                                    <div class="stat-number">95%</div>
-                                    <div class="stat-label">Success rate</div>
-                                </div>
-                            </div>
-                            
-                            <div class="trust-indicators">
-                                <div class="trust-item">
-                                    <i class="fas fa-check"></i>
-                                    <span>SOC 2 Compliant</span>
-                                </div>
-                                <div class="trust-item">
-                                    <i class="fas fa-check"></i>
-                                    <span>GDPR Compliant</span>
-                                </div>
-                                <div class="trust-item">
-                                    <i class="fas fa-check"></i>
-                                    <span>BBB Accredited</span>
-                                </div>
-                            </div>
+                    <form id="nameCaptureForm" style="margin-top:1.5rem;">
+                        <div class="form-group">
+                            <label for="fullName">Full Name</label>
+                            <input type="text" id="fullName" placeholder="Enter your full name" required>
                         </div>
+                        <button type="submit" class="btn btn-primary btn-large">Find My Claims</button>
+                    </form>
+                    <div class="mini-testimonial">
+                        <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Jessica S." class="testimonial-avatar-mini" />
+                        <p>"The signup was surprisingly fast. I was done in less than two minutes and they found my first claim within a week."</p>
+                        <span>Jessica S.</span>
                     </div>
                 </div>
-
-                <!-- Step 2: Connect Accounts -->
-                <div class="modal-step" id="step2">
-                    <div class="step-content">
-                        <h2>Connect Your Accounts to Find Claims</h2>
-                        <p class="explanation">Why we ask: To find money you're owed, our secure engine scans your email receipts and transaction history for eligible purchases. We use Plaid to connect to your bank, which means we never see or store your banking password. The connection is read-only.</p>
-                        <div class="connection-options">
-                            <div class="connection-card">
-                                <div class="connection-header">
-                                    <i class="fab fa-google"></i>
-                                    <h3>Connect Google</h3>
-                                </div>
-                                <p>Scan email receipts for eligible purchases</p>
-                                <button class="btn btn-outline">Connect</button>
-                            </div>
-                            <div class="connection-card">
-                                <div class="connection-header">
-                                    <i class="fas fa-university"></i>
-                                    <h3>Connect Bank via Plaid</h3>
-                                </div>
-                                <p>Scan transaction history for claims</p>
-                                <button class="btn btn-outline">Connect</button>
-                            </div>
-                        </div>
-                        <div class="trust-badges">
-                            <div class="badge">
-                                <i class="fas fa-shield-alt"></i>
-                                <span>Secured by Plaid</span>
-                            </div>
-                            <div class="badge">
-                                <i class="fas fa-lock"></i>
-                                <span>Bank-level AES-256 Encryption</span>
-                            </div>
-                        </div>
-                        <p class="social-proof">Over 15,000 users have securely connected their accounts to find claims.</p>
-                        <button type="button" class="btn btn-primary" onclick="nextStep(3)">Next</button>
+                <!-- Step 2: Loading Animation -->
+                <div class="modal-step" id="funnelStep2" style="display:none; text-align:center;">
+                    <h2>Searching for Claims...</h2>
+                    <div class="loading-spinner" style="margin:2rem auto;">
+                        <i class="fas fa-spinner fa-spin" style="font-size:2.5rem;"></i>
                     </div>
-                    <div class="step-sidebar">
-                        <div class="testimonial-mini">
-                            <p>"I was skeptical about connecting my accounts, but the security measures put me at ease."</p>
-                            <span>- Sarah M.</span>
-                        </div>
+                    <p>We're checking our database for potential settlements you may be eligible for.</p>
+                    <div class="trust-badge">
+                        <i class="fas fa-check-circle"></i> SOC 2 & GDPR Compliant
                     </div>
                 </div>
-
-                <!-- Step 3: Payout Method -->
-                <div class="modal-step" id="step3">
-                    <div class="step-content">
-                        <h2>How Would You Like to Get Paid?</h2>
-                        <p>When we successfully recover money for you, we'll send it directly to your preferred account. Choose where you'd like to receive your funds.</p>
-                        <div class="payout-options">
-                            <div class="payout-card">
-                                <div class="payout-icon">
-                                    <i class="fas fa-university"></i>
-                                </div>
-                                <div class="payout-info">
-                                    <h3>Direct Deposit (Bank)</h3>
-                                    <p>Fastest way to receive your funds</p>
-                                </div>
-                                <input type="radio" name="payout" value="bank" checked>
-                            </div>
-                            <div class="payout-card">
-                                <div class="payout-icon">
-                                    <i class="fab fa-paypal"></i>
-                                </div>
-                                <div class="payout-info">
-                                    <h3>PayPal</h3>
-                                    <p>Instant transfer to your PayPal account</p>
-                                </div>
-                                <input type="radio" name="payout" value="paypal">
-                            </div>
-                        </div>
-                        <button type="button" class="btn btn-primary" onclick="nextStep(4)">Next: Final Step</button>
+                <!-- Step 3: Blurred Results -->
+                <div class="modal-step" id="funnelStep3" style="display:none; text-align:center;">
+                    <h2>Potential Claims Found!</h2>
+                    <div class="blurred-claims-list">
+                        <div class="claim-card blurred"><h4>2024 Tech Company Data Privacy Settlement</h4><p>Up to $340 - Data Breach</p></div>
+                        <div class="claim-card blurred"><h4>National Bank Overdraft Fee Lawsuit</h4><p>Refunds for Excessive Fees</p></div>
+                        <div class="claim-card blurred"><h4>Major Retailer Consumer Refund</h4><p>Product Pricing Settlement</p></div>
                     </div>
-                    <div class="step-sidebar">
-                        <div class="testimonial-mini">
-                            <p>"I got my first payout in just 3 days. The direct deposit was seamless."</p>
-                            <span>- Mark T.</span>
-                        </div>
+                    <p class="reassurance">Your information is secure. We never sell your data.</p>
+                    <button class="btn btn-primary btn-large" id="toStripeBtn">Create an Account to See Details</button>
+                    <div class="mini-testimonial">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Mark T." class="testimonial-avatar-mini" />
+                        <p>"I was hesitant, but they only charged me after I got $85 in my bank account. Totally worth it."</p>
+                        <span>Mark T.</span>
                     </div>
                 </div>
-
-                <!-- Step 4: Waitlist Confirmation -->
-                <div class="modal-step" id="step4">
-                    <div class="step-content">
-                        <div class="waitlist-header">
-                            <div class="waitlist-icon">
-                                <i class="fas fa-rocket"></i>
-                            </div>
-                            <h2>Almost Ready to Launch!</h2>
-                            <p class="waitlist-subtitle">Claim Scouter is in final testing and will be available soon. Join our exclusive waitlist to be among the first to start recovering your money.</p>
-                        </div>
-
-                        <div class="launch-timeline">
-                            <h3>What to Expect:</h3>
-                            <div class="timeline-item">
-                                <div class="timeline-icon">📋</div>
-                                <div class="timeline-content">
-                                    <strong>Your spot is reserved</strong>
-                                    <span>You're now on our priority waitlist</span>
-                                </div>
-                            </div>
-                            <div class="timeline-item">
-                                <div class="timeline-icon">🚀</div>
-                                <div class="timeline-content">
-                                    <strong>Launch notification</strong>
-                                    <span>We'll email you the moment we're live</span>
-                                </div>
-                            </div>
-                            <div class="timeline-item">
-                                <div class="timeline-icon">💰</div>
-                                <div class="timeline-content">
-                                    <strong>Start earning immediately</strong>
-                                    <span>Begin finding claims within 24 hours of launch</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="security-assurance">
-                            <div class="assurance-card">
-                                <i class="fas fa-shield-alt"></i>
-                                <div class="assurance-text">
-                                    <strong>No Payment Required</strong>
-                                    <span>We haven't saved any credit card information. You'll only pay when the product launches.</span>
-                                </div>
-                            </div>
-                            <div class="assurance-card">
-                                <i class="fas fa-clock"></i>
-                                <div class="assurance-text">
-                                    <strong>Early Access Pricing</strong>
-                                    <span>Waitlist members get our launch price: $24/year + 25% success fee with money-back guarantee.</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <button type="button" class="btn btn-primary btn-large" onclick="completeSignup()">
-                            Join the Waitlist
-                            <i class="fas fa-arrow-right"></i>
-                        </button>
+                <!-- Step 4: Stripe Link -->
+                <div class="modal-step" id="funnelStep4" style="display:none; text-align:center;">
+                    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/stripe.svg" alt="Stripe" style="height:48px;margin-bottom:1.2rem;filter:drop-shadow(0 2px 8px rgba(99,91,255,0.12));" />
+                    <h2>Connect with Stripe</h2>
+                    <p class="modal-desc">To see your claim details and get paid, please securely link your account with Stripe.<br><br><strong>Why Stripe?</strong> Stripe is the world’s most trusted payment platform, used by millions of businesses. We never see or store your banking credentials.</p>
+                    <div class="pricing-info-box">
+                        <strong>$24/year</strong><br>
+                        <span>Money Back Guarantee if you don't get 2X your money after a year</span>
                     </div>
-                    <div class="step-sidebar">
-                        <div class="sidebar-content">
-                            <h3>Launch Benefits</h3>
-                            <div class="launch-benefits">
-                                <div class="benefit-item-mini">
-                                    <i class="fas fa-star"></i>
-                                    <span>Priority access when we launch</span>
-                                </div>
-                                <div class="benefit-item-mini">
-                                    <i class="fas fa-percentage"></i>
-                                    <span>Locked-in launch pricing</span>
-                                </div>
-                                <div class="benefit-item-mini">
-                                    <i class="fas fa-bell"></i>
-                                    <span>Instant launch notification</span>
-                                </div>
-                                <div class="benefit-item-mini">
-                                    <i class="fas fa-gift"></i>
-                                    <span>Potential early-bird bonuses</span>
-                                </div>
-                            </div>
-                            
-                            <div class="waitlist-stats">
-                                <div class="stat-item">
-                                    <div class="stat-number">2,847</div>
-                                    <div class="stat-label">People on waitlist</div>
-                                </div>
-                                <div class="stat-item">
-                                    <div class="stat-number">Q1 2024</div>
-                                    <div class="stat-label">Expected launch</div>
-                                </div>
-                            </div>
-                        </div>
+                    <ul class="stripe-benefits">
+                        <li><i class="fas fa-lock"></i> Bank-level security & encryption</li>
+                        <li><i class="fas fa-check-circle"></i> No charges until you get paid</li>
+                        <li><i class="fas fa-star"></i> Fast, direct payouts to your account</li>
+                    </ul>
+                    <button class="btn btn-primary btn-large" id="stripeLinkBtn" style="margin-top:1.5rem;">Link with Stripe</button>
+                    <div class="mini-testimonial">
+                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Sarah M." class="testimonial-avatar-mini" />
+                        <p>"I got my first payout in just 3 days. The direct deposit was seamless and secure."</p>
+                        <span>Sarah M.</span>
+                    </div>
+                </div>
+                <!-- Step 5: Confirmation -->
+                <div class="modal-step" id="funnelStep5" style="display:none; text-align:center;">
+                    <div class="success-icon" style="font-size:2.5rem;color:#38a169;margin-bottom:1rem;">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <h2>You're All Set!</h2>
+                    <p class="modal-desc">Thank you for signing up. We'll let you know as soon as Claim Scouter is released and you can start claiming your money.<br><br><strong>Your information is secure and your spot is reserved.</strong></p>
+                    <div class="mini-testimonial">
+                        <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Amanda R." class="testimonial-avatar-mini" />
+                        <p>"The process was easy and I felt safe every step of the way. Can't wait for launch!"</p>
+                        <span>Amanda R.</span>
                     </div>
                 </div>
             </div>

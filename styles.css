@@ -2180,18 +2180,23 @@ p {
 .benefit-text {
     display: flex;
     flex-direction: column;
-    gap: 0.25rem;
+    align-items: center;
 }
 
 .benefit-text strong {
-    font-weight: 600;
-    color: #1a202c;
-    font-size: 0.95rem;
+    font-size: 1rem;
+    color: #222;
+    min-height: 2.2em;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
 }
 
 .benefit-text span {
-    color: #4a5568;
-    font-size: 0.875rem;
+    font-size: 0.93rem;
+    color: #888;
+    margin-top: 0.1em;
+    line-height: 1.35;
 }
 
 .step-form {
@@ -3627,4 +3632,358 @@ Testing Checklist:
 /* Center text in Our Story block */
 .about-story {
   text-align: center;
+}
+
+/* User Funnel Modal Styles */
+#userFunnelModal .modal-content {
+  padding: 2rem 1rem 1.5rem 1rem;
+}
+#userFunnelModal .modal-step {
+  display: none;
+}
+#userFunnelModal .modal-step.active {
+  display: block;
+}
+.blurred-claims-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  margin: 2rem 0 2.5rem 0;
+}
+.claim-card.blurred {
+  filter: blur(4px);
+  background: #f5f6fa;
+  border-radius: 12px;
+  padding: 1.25rem 1rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  text-align: left;
+  max-width: 420px;
+  margin: 0 auto;
+}
+.loading-spinner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 80px;
+}
+@media (max-width: 600px) {
+  .blurred-claims-list {
+    gap: 0.75rem;
+  }
+  .claim-card.blurred {
+    padding: 1rem 0.5rem;
+    font-size: 0.98rem;
+  }
+}
+
+/* Modal description and trust/benefit styles */
+.modal-desc {
+  font-size: 1.08rem;
+  color: #4a5568;
+  margin-bottom: 1.2rem;
+  text-align: center;
+}
+.benefits-list {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-bottom: 1.2rem;
+}
+.benefit-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 140px;
+}
+.benefit-icon {
+  font-size: 1.6rem;
+  margin-bottom: 0.3rem;
+}
+.benefit-text strong {
+  font-size: 1rem;
+  color: #222;
+}
+.benefit-text span {
+  font-size: 0.95rem;
+  color: #666;
+}
+.privacy-note {
+  font-size: 0.98rem;
+  color: #4a5568;
+  margin: 1.2rem 0 0.5rem 0;
+  text-align: center;
+}
+.privacy-note i {
+  color: #667eea;
+  margin-right: 0.4em;
+}
+.mini-testimonial {
+  background: #f7fafc;
+  border-radius: 10px;
+  padding: 0.8rem 1rem;
+  margin: 1.2rem auto 0 auto;
+  max-width: 340px;
+  font-size: 0.98rem;
+  color: #444;
+  text-align: center;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.03);
+}
+.mini-testimonial span {
+  display: block;
+  margin-top: 0.5rem;
+  color: #888;
+  font-size: 0.93rem;
+}
+.trust-badge {
+  margin-top: 1.5rem;
+  color: #38a169;
+  font-weight: 600;
+  font-size: 1.08rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+.trust-badge i {
+  color: #38a169;
+  font-size: 1.2rem;
+}
+.reassurance {
+  color: #4a5568;
+  font-size: 1.01rem;
+  margin: 1.2rem 0 0.5rem 0;
+  text-align: center;
+}
+@media (max-width: 700px) {
+  .benefits-list {
+    flex-direction: column;
+    gap: 0.7rem;
+    align-items: center;
+  }
+  .mini-testimonial {
+    max-width: 98vw;
+    font-size: 0.97rem;
+  }
+}
+
+/* Fix modal formatting and centering */
+#userFunnelModal .modal {
+  max-width: 420px;
+  margin: 2.5rem auto;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+  padding: 0 0 1.5rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#userFunnelModal .modal-content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 1rem 1.5rem 1rem;
+  box-sizing: border-box;
+}
+.benefits-list {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 1.5rem;
+  margin-bottom: 2.2rem;
+  width: 100%;
+}
+.benefit-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  min-width: 120px;
+  max-width: 140px;
+}
+.benefit-icon {
+  font-size: 2rem;
+  margin-bottom: 0.3rem;
+}
+form#nameCaptureForm {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 0.5rem;
+}
+#nameCaptureForm .form-group {
+  width: 100%;
+  max-width: 95%;
+  margin-bottom: 1.2rem;
+  margin-top: 0;
+}
+#nameCaptureForm label {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #222;
+  margin-bottom: 0.4rem;
+  align-self: flex-start;
+}
+#nameCaptureForm input[type="text"] {
+  width: 100%;
+  max-width: 100%;
+  padding: 0.7rem 1rem;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  box-sizing: border-box;
+}
+#nameCaptureForm button {
+  width: 100%;
+  max-width: 100%;
+  margin-top: 0.5rem;
+}
+@media (max-width: 600px) {
+  #userFunnelModal .modal {
+    max-width: 98vw;
+    margin: 1rem auto;
+    padding: 0 0 1rem 0;
+  }
+  #userFunnelModal .modal-content {
+    padding: 1.2rem 0.5rem 1rem 0.5rem;
+  }
+  .benefits-list {
+    flex-direction: column;
+    gap: 0.7rem;
+    align-items: center;
+  }
+  .benefit-item {
+    min-width: 0;
+    max-width: 98vw;
+  }
+  #nameCaptureForm input[type="text"], #nameCaptureForm button, #nameCaptureForm .form-group {
+    max-width: 98vw;
+  }
+}
+
+/* Stripe benefits list and modal step improvements */
+.stripe-benefits {
+  list-style: none;
+  padding: 0;
+  margin: 1.2rem 0 1.5rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  align-items: flex-start;
+}
+.stripe-benefits li {
+  font-size: 1.01rem;
+  color: #444;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.stripe-benefits i {
+  color: #667eea;
+  font-size: 1.1rem;
+}
+#userFunnelModal .modal-step h2 {
+  margin-bottom: 0.7rem;
+}
+#userFunnelModal .modal-step {
+  padding-bottom: 0.5rem;
+}
+.success-icon {
+  font-size: 2.5rem;
+  color: #38a169;
+  margin-bottom: 1rem;
+}
+@media (max-width: 600px) {
+  .stripe-benefits {
+    font-size: 0.97rem;
+    margin: 0.8rem 0 1.2rem 0;
+  }
+}
+
+/* Pricing info box for Stripe step */
+.pricing-info-box {
+  background: #f5f6fa;
+  border: 1.5px solid #d1d5db;
+  border-radius: 10px;
+  padding: 1rem 1.2rem;
+  margin: 1.2rem auto 1.2rem auto;
+  max-width: 340px;
+  font-size: 1.08rem;
+  color: #222;
+  text-align: center;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.03);
+}
+.pricing-info-box strong {
+  color: #4f46e5;
+  font-size: 1.12rem;
+}
+.pricing-info-box span {
+  display: block;
+  color: #4a5568;
+  font-size: 0.98rem;
+  margin-top: 0.3rem;
+}
+
+#userFunnelModal .modal-content, #userFunnelModal .modal-step {
+  align-items: center;
+  text-align: center;
+}
+.pricing-info-box {
+  margin-left: auto;
+  margin-right: auto;
+}
+.stripe-benefits {
+  align-items: center;
+}
+.stripe-benefits li {
+  justify-content: center;
+}
+.mini-testimonial {
+  margin-left: auto;
+  margin-right: auto;
+}
+#userFunnelModal .btn {
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+#userFunnelModal .modal-step h2 {
+  width: 100%;
+  text-align: center;
+}
+#userFunnelModal .modal-step {
+  width: 100%;
+  max-width: 420px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.benefits-list {
+  margin-bottom: 0.7rem;
+}
+#nameCaptureForm {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: none !important;
+}
+#nameCaptureForm .form-group {
+  margin-bottom: 1.2rem;
+  margin-top: 0;
+}
+
+.testimonial-avatar-mini {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 0.5rem;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
 }
