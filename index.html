@@ -969,7 +969,26 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
                         </div>
                     </div>
 
-                    <!-- Why Choose Us Grid -->
+                    <!-- Quick Setup Form (moved up) -->
+                    <div class="setup-section">
+                        <h3>Ready to Start? Takes Less Than 2 Minutes</h3>
+                        <form id="nameCaptureForm">
+                            <div class="form-group">
+                                <label for="fullName">Full Name</label>
+                                <input type="text" id="fullName" placeholder="Enter your full name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="emailAddress">Email Address</label>
+                                <input type="email" id="emailAddress" placeholder="Enter your email address" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-large">
+                                <i class="fas fa-search"></i>
+                                Find My Claims
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Why Choose Us Grid (now below setup-section) -->
                     <div class="why-choose-grid">
                         <div class="why-item">
                             <div class="why-icon">🤖</div>
@@ -999,25 +1018,6 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
                                 <p>Refund your $48 fee if we don't find $96+ in claims within 12 months.</p>
                             </div>
                         </div>
-                    </div>
-
-                    <!-- Quick Setup Form -->
-                    <div class="setup-section">
-                        <h3>Ready to Start? Takes Less Than 2 Minutes</h3>
-                        <form id="nameCaptureForm">
-                            <div class="form-group">
-                                <label for="fullName">Full Name</label>
-                                <input type="text" id="fullName" placeholder="Enter your full name" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="emailAddress">Email Address</label>
-                                <input type="email" id="emailAddress" placeholder="Enter your email address" required>
-                            </div>
-                            <button type="submit" class="btn btn-primary btn-large">
-                                <i class="fas fa-search"></i>
-                                Find My Claims
-                            </button>
-                        </form>
                     </div>
 
                     <!-- Trust Indicators -->
@@ -1097,18 +1097,18 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
                 <!-- Step 4: Stripe Link -->
                 <div class="modal-step" id="funnelStep4" style="display:none; text-align:center;">
                     <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/stripe.svg" alt="Stripe" style="height:48px;margin-bottom:1.2rem;filter:drop-shadow(0 2px 8px rgba(99,91,255,0.12));" />
-                    <h2>Connect with Stripe</h2>
-                    <p class="modal-desc">To see your claim details and get paid, please securely link your account with Stripe.<br><br><strong>Why Stripe?</strong> Stripe is the world’s most trusted payment platform, used by millions of businesses. We never see or store your banking credentials.</p>
+                    <h2>Unlock Your Claims Instantly</h2>
+                    <p class="modal-desc">Secure your access to all your eligible claims by subscribing for just <strong>$48/year</strong>.<br><br>Connect with Stripe below to complete your checkout and start your journey to recovering what's yours.<br><br><strong>Why Stripe?</strong> Stripe is the world’s most trusted payment platform, used by millions of businesses. We never see or store your banking credentials.</p>
                     <div class="pricing-info-box">
                         <strong>$48/year</strong><br>
                         <span>Full refund if we don't find you 2X your annual fee in claims</span>
                     </div>
                     <ul class="stripe-benefits">
                         <li><i class="fas fa-lock"></i> Bank-level security & encryption</li>
-                        <li><i class="fas fa-check-circle"></i> No charges until you get paid</li>
+                        <li><i class="fas fa-undo"></i> 1 year money back guarantee</li>
                         <li><i class="fas fa-star"></i> Fast, direct payouts to your account</li>
                     </ul>
-                    <button class="btn btn-primary btn-large" id="stripeLinkBtn" style="margin-top:1.5rem;">Link with Stripe</button>
+                    <button class="btn btn-primary btn-large" id="stripeLinkBtn" style="margin-top:1.5rem;">Subscribe & Unlock with Stripe</button>
                     <div class="mini-testimonial">
                         <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Sarah M." class="testimonial-avatar-mini" />
                         <p>"I got my first payout in just 3 days. The direct deposit was seamless and secure."</p>

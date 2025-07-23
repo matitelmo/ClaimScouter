@@ -3362,12 +3362,11 @@ p {
     }
     
     .modal-step h2 {
-        font-size: 1.3rem;
-        line-height: 1.2;
+        font-size: 1.6rem;
     }
     
-    .modal-step p {
-        font-size: 0.9rem;
+    .modal-step p, .modal-desc {
+        font-size: 0.88rem;
     }
     
     /* Form improvements */
@@ -4476,7 +4475,7 @@ form#nameCaptureForm {
 
 /* Enhanced Modal Step Styling */
 #userFunnelModal .modal-step h2 {
-    font-size: 1.75rem;
+    font-size: 1.6rem;
     font-weight: 700;
     color: #1a1a1a;
     margin-bottom: 1rem;
@@ -4484,7 +4483,7 @@ form#nameCaptureForm {
 }
 
 #userFunnelModal .modal-desc {
-    font-size: 1rem;
+    font-size: 0.88rem;
     color: #64748b;
     text-align: center;
     margin-bottom: 1.5rem;
@@ -5297,4 +5296,10 @@ form#nameCaptureForm {
 }
 .bar-amount {
     font-size: 0.96rem; /* reduced by 20% */
+}
+.modal-step h2 {
+    font-size: 1.36rem;
+}
+.modal-step p, .modal-desc {
+    font-size: 0.75rem;
 }
