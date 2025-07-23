@@ -4919,3 +4919,69 @@ form#nameCaptureForm {
   .flying-card { width: 38vw; min-width: 80px; font-size: 0.98rem; }
 }
 /* --- End Animated Loading Sequence Styles --- */
+
+/* --- Settlement Spotlight Grid Styles --- */
+.settlement-spotlight-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 2rem;
+  margin: 2rem 0 1.5rem 0;
+}
+.spotlight-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 2px 16px rgba(102,126,234,0.08), 0 1.5px 4px rgba(0,0,0,0.03);
+  padding: 2rem 1.2rem 1.5rem 1.2rem;
+  text-align: center;
+  text-decoration: none;
+  color: #222;
+  transition: transform 0.22s cubic-bezier(.7,.2,.2,1), box-shadow 0.22s;
+  cursor: pointer;
+  min-height: 320px;
+}
+.spotlight-card:hover, .spotlight-card:focus {
+  transform: translateY(-5px) scale(1.025);
+  box-shadow: 0 8px 32px rgba(102,126,234,0.13), 0 2px 8px rgba(0,0,0,0.06);
+  outline: none;
+}
+.spotlight-logo {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+  margin-bottom: 1.2rem;
+  border-radius: 12px;
+  background: #f5f6fa;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  padding: 0.5rem;
+}
+.spotlight-card h3 {
+  font-size: 1.18rem;
+  font-weight: 600;
+  margin: 0.5rem 0 0.5rem 0;
+  color: #3b3663;
+}
+.spotlight-card p {
+  font-size: 1.02rem;
+  color: #4a5568;
+  margin: 0;
+}
+@media (max-width: 700px) {
+  .settlement-spotlight-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 1.1rem;
+  }
+  .spotlight-card {
+    min-height: 220px;
+    padding: 1.2rem 0.5rem 1rem 0.5rem;
+  }
+}
+@media (max-width: 480px) {
+  .settlement-spotlight-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}
+/* --- End Settlement Spotlight Grid Styles --- */
