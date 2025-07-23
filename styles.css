@@ -21,7 +21,7 @@ body {
 .container, .value-prop .container {
     max-width: 100%;
     width: 100%;
-    overflow-x: hidden;
+    /* overflow-x: hidden; */
 }
 
 /* Typography */
@@ -246,7 +246,7 @@ p {
     grid-template-columns: 1fr 1fr;
     gap: 4rem;
     align-items: center;
-    overflow-x: hidden;
+    /* overflow-x: hidden; */
     width: 100%;
     max-width: 100%;
 }
@@ -659,8 +659,8 @@ p {
     /* Remove flex centering */
     display: block;
     width: 100%;
-    overflow-x: hidden;
-    overflow-y: hidden;
+    /* overflow-x: hidden; */
+    /* overflow-y: hidden; */
     overscroll-behavior: contain;
     height: auto !important;
 }
@@ -934,7 +934,7 @@ p {
     padding: 6rem 0;
     color: white;
     position: relative;
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 
 .value-prop::before {
