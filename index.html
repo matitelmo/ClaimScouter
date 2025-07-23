@@ -14,7 +14,7 @@
     <header class="header">
         <div class="container">
             <div class="header-content">
-                            <div class="logo">
+                            <div class="logo" onclick="scrollToTop()" style="cursor: pointer;">
                 <div class="logo-icon">
                     <img src="logo.svg" alt="Claim Scouter" class="logo-image">
                     <div class="logo-fallback">🧭🔍</div>
@@ -31,7 +31,7 @@
                 <div class="header-cta">
                     <button class="btn btn-primary" onclick="openUserFunnelModal()">Get Started</button>
                 </div>
-                <button class="mobile-menu-toggle" aria-label="Toggle mobile menu" aria-expanded="false">
+                <button class="mobile-menu-toggle" onclick="toggleMobileMenu()" aria-label="Toggle mobile menu" aria-expanded="false">
                     <i class="fas fa-bars"></i>
                 </button>
             </div>
@@ -412,7 +412,7 @@
                 </div>
                 <div class="pricing-content">
                     <h3>Simple & Transparent Pricing</h3>
-                    <p>Pay just $24 per year (only $2/month) plus 25% of settlements we recover. If we don't find at least $48 in available claims within 12 months, we'll refund your entire annual fee.</p>
+                    <p>Pay just $24 per year (only $2/month) plus 25% of settlements we recover. If we don't find at least 2X your annual fee in available claims within 12 months, we'll refund your entire annual fee.</p>
                     <div class="pricing-features">
                         <div class="feature-item">
                             <i class="fas fa-check"></i>
@@ -424,7 +424,7 @@
                         </div>
                         <div class="feature-item">
                             <i class="fas fa-check"></i>
-                            <span>Full Refund if We Don't Find $48+ in Claims</span>
+                            <span>Money Back Guarantee</span>
                         </div>
                         <div class="feature-item">
                             <i class="fas fa-check"></i>
@@ -451,7 +451,7 @@
                     </div>
                     <div class="faq-item">
                         <h4>What's the money-back guarantee?</h4>
-                        <p>If we don't find at least $48 in available claims for you within 12 months (double your $24 fee), we'll refund your entire annual fee. No questions asked.</p>
+                        <p>If we don't find at least 2X your annual fee in available claims for you within 12 months, we'll refund your entire annual fee. No questions asked.</p>
                     </div>
                     <div class="faq-item">
                         <h4>Are there any other costs?</h4>
@@ -1068,7 +1068,7 @@
                     <p class="modal-desc">To see your claim details and get paid, please securely link your account with Stripe.<br><br><strong>Why Stripe?</strong> Stripe is the world’s most trusted payment platform, used by millions of businesses. We never see or store your banking credentials.</p>
                     <div class="pricing-info-box">
                         <strong>$24/year</strong><br>
-                        <span>Money Back Guarantee if you don't get 2X your money after a year</span>
+                        <span>Full refund if we don't find you 2X your annual fee in claims</span>
                     </div>
                     <ul class="stripe-benefits">
                         <li><i class="fas fa-lock"></i> Bank-level security & encryption</li>
