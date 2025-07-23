@@ -47,7 +47,7 @@
                     <p>Billions of dollars in settlement funds go unclaimed every year. Claim Scouter is your automated advocate - a "set it and forget it" service that finds and files claims for class action settlements you're owed, turning complex legal processes into passive income.</p>
                     <form class="email-form" id="emailForm">
                         <div class="form-group">
-                            <input type="email" placeholder="Enter your email address" required>
+                            <input type="email" id="heroEmail" placeholder="Enter your email address" required>
                             <button type="submit" class="btn btn-primary" id="heroCtaBtn">Check Your Settlements</button>
                         </div>
                     </form>
@@ -929,49 +929,109 @@
     <div class="modal-overlay" id="userFunnelModal">
         <div class="modal">
             <div class="modal-header">
-                <button class="modal-close" onclick="closeUserFunnelModal()">
-                    <i class="fas fa-times"></i>
-                </button>
+                <div class="modal-header-content">
+                    <div class="modal-title">Claim Scouter</div>
+                    <button class="modal-close" onclick="closeUserFunnelModal()" aria-label="Close modal">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
             </div>
             <div class="modal-content">
-                <!-- Step 1: Name Capture -->
+                <!-- Step 1: Why Choose ClaimScouter -->
                 <div class="modal-step" id="funnelStep1">
-                    <h2>Let's Get Started</h2>
-                    <p class="modal-desc">Create your secure account to start finding money you're owed. Our platform has already helped users recover over $2.5 million in unclaimed settlements.</p>
-                    <div class="benefits-list">
-                        <div class="benefit-item">
-                            <div class="benefit-icon">🔒</div>
-                            <div class="benefit-text">
-                                <strong>Secure</strong>
-                                <span>Protected with AES-256 encryption</span>
+                    <h2>Why Choose ClaimScouter?</h2>
+                    <p class="modal-desc">Join 10,000+ members who've recovered over $2.5 million. Here's what makes us different:</p>
+                    
+                    <!-- Key Statistics -->
+                    <div class="modal-stats">
+                        <div class="stat-card">
+                            <div class="stat-number">$2.8B</div>
+                            <div class="stat-label">Unclaimed annually</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">$150</div>
+                            <div class="stat-label">Average recovery</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">98%</div>
+                            <div class="stat-label">AI accuracy</div>
+                        </div>
+                    </div>
+
+                    <!-- Why Choose Us Grid -->
+                    <div class="why-choose-grid">
+                        <div class="why-item">
+                            <div class="why-icon">🤖</div>
+                            <div class="why-content">
+                                <h4>AI-Powered Discovery</h4>
+                                <p>Automatically scans thousands of settlements to find your eligible claims.</p>
                             </div>
                         </div>
-                        <div class="benefit-item">
-                            <div class="benefit-icon">⚡</div>
-                            <div class="benefit-text">
-                                <strong>Quick setup</strong>
-                                <span>Takes less than 2 minutes to get started</span>
+                        <div class="why-item">
+                            <div class="why-icon">⚡</div>
+                            <div class="why-content">
+                                <h4>Set It & Forget It</h4>
+                                <p>We handle everything. No forms, no deadlines - just passive income.</p>
                             </div>
                         </div>
-                        <div class="benefit-item">
-                            <div class="benefit-icon">💰</div>
-                            <div class="benefit-text">
-                                <strong>Get Paid</strong>
-                                <span>Most users find multiple claims worth $50-300</span>
+                        <div class="why-item">
+                            <div class="why-icon">🔒</div>
+                            <div class="why-content">
+                                <h4>Bank-Level Security</h4>
+                                <p>AES-256 encryption, SOC 2 compliance. Your data is never sold.</p>
+                            </div>
+                        </div>
+                        <div class="why-item">
+                            <div class="why-icon">💰</div>
+                            <div class="why-content">
+                                <h4>Money-Back Guarantee</h4>
+                                <p>Refund your $24 fee if we don't find $48+ in claims within 12 months.</p>
                             </div>
                         </div>
                     </div>
-                    <form id="nameCaptureForm" style="margin-top:1.5rem;">
-                        <div class="form-group">
-                            <label for="fullName">Full Name</label>
-                            <input type="text" id="fullName" placeholder="Enter your full name" required>
+
+                    <!-- Quick Setup Form -->
+                    <div class="setup-section">
+                        <h3>Ready to Start? Takes Less Than 2 Minutes</h3>
+                        <form id="nameCaptureForm">
+                            <div class="form-group">
+                                <label for="fullName">Full Name</label>
+                                <input type="text" id="fullName" placeholder="Enter your full name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="emailAddress">Email Address</label>
+                                <input type="email" id="emailAddress" placeholder="Enter your email address" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-large">
+                                <i class="fas fa-search"></i>
+                                Find My Claims
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Trust Indicators -->
+                    <div class="trust-indicators">
+                        <div class="trust-badge">
+                            <i class="fas fa-shield-alt"></i>
+                            <span>SOC 2 Compliant</span>
                         </div>
-                        <button type="submit" class="btn btn-primary btn-large">Find My Claims</button>
-                    </form>
-                    <div class="mini-testimonial">
-                        <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Jessica S." class="testimonial-avatar-mini" />
-                        <p>"The signup was surprisingly fast. I was done in less than two minutes and they found my first claim within a week."</p>
-                        <span>Jessica S.</span>
+                        <div class="trust-badge">
+                            <i class="fas fa-lock"></i>
+                            <span>256-Bit SSL</span>
+                        </div>
+                        <div class="trust-badge">
+                            <i class="fas fa-user-shield"></i>
+                            <span>GDPR Compliant</span>
+                        </div>
+                    </div>
+
+                    <!-- Social Proof -->
+                    <div class="social-proof">
+                        <div class="mini-testimonial">
+                            <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Jessica S." class="testimonial-avatar-mini" />
+                            <p>"The signup was surprisingly fast. I was done in less than two minutes and they found my first claim within a week."</p>
+                            <span>Jessica S. - Recovered $150</span>
+                        </div>
                     </div>
                 </div>
                 <!-- Step 2: Loading Animation -->
@@ -1022,18 +1082,56 @@
                         <span>Sarah M.</span>
                     </div>
                 </div>
-                <!-- Step 5: Confirmation -->
+                <!-- Step 5: Waitlist Confirmation -->
                 <div class="modal-step" id="funnelStep5" style="display:none; text-align:center;">
-                    <div class="success-icon" style="font-size:2.5rem;color:#38a169;margin-bottom:1rem;">
-                        <i class="fas fa-check-circle"></i>
+                    <div class="waitlist-header">
+                        <div class="waitlist-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <h2>You're on the Waitlist! 🎉</h2>
+                        <p class="waitlist-subtitle">Due to capacity constraints, we're only allowing a limited number of users to sign up at launch.</p>
                     </div>
-                    <h2>You're All Set!</h2>
-                    <p class="modal-desc">Thank you for signing up. We'll let you know as soon as Claim Scouter is released and you can start claiming your money.<br><br><strong>Your information is secure and your spot is reserved.</strong></p>
+                    
+                    <div class="waitlist-status">
+                        <div class="status-card">
+                            <div class="status-icon">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <h3>Your Spot is Reserved</h3>
+                            <p>You're #<span id="waitlistNumber">1,247</span> in line. We'll notify you immediately when it's your turn to join.</p>
+                        </div>
+                    </div>
+                    
+
+                    
+                    <div class="early-access-benefits">
+                        <h3>Early Access Benefits</h3>
+                        <div class="benefits-grid">
+                            <div class="benefit-item">
+                                <i class="fas fa-star"></i>
+                                <span>Locked in launch pricing</span>
+                            </div>
+                            <div class="benefit-item">
+                                <i class="fas fa-gift"></i>
+                                <span>Priority claim processing</span>
+                            </div>
+                            <div class="benefit-item">
+                                <i class="fas fa-headset"></i>
+                                <span>Dedicated support access</span>
+                            </div>
+                        </div>
+                    </div>
+                    
                     <div class="mini-testimonial">
                         <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Amanda R." class="testimonial-avatar-mini" />
-                        <p>"The process was easy and I felt safe every step of the way. Can't wait for launch!"</p>
-                        <span>Amanda R.</span>
+                        <p>"I'm so glad I got on the waitlist early. The launch was smooth and I found my first claim within days!"</p>
+                        <span>Amanda R. - Waitlist Member</span>
                     </div>
+                    
+                    <button class="btn btn-primary btn-large" onclick="closeUserFunnelModal()">
+                        Perfect! I'll wait for my turn
+                        <i class="fas fa-thumbs-up"></i>
+                    </button>
                 </div>
             </div>
         </div>

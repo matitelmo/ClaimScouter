@@ -181,6 +181,14 @@ function openUserFunnelModal() {
         modal.classList.add('active');
         document.body.style.overflow = 'hidden';
         showFunnelStep(1);
+        
+        // Auto-populate email using the global variable
+        if (window.lastEnteredEmail) {
+            const modalEmailInput = document.getElementById('emailAddress');
+            if (modalEmailInput) {
+                modalEmailInput.value = window.lastEnteredEmail;
+            }
+        }
     }
 }
 window.openUserFunnelModal = openUserFunnelModal;
@@ -193,7 +201,10 @@ document.addEventListener('DOMContentLoaded', function() {
             e.preventDefault();
             const emailInput = heroForm.querySelector('input[type="email"]');
             const email = emailInput ? emailInput.value.trim() : '';
+            
             if (email && email.includes('@')) {
+                // Store email globally so modal can access it
+                window.lastEnteredEmail = email;
                 localStorage.setItem('userEmail', email);
                 openUserFunnelModal();
             } else {
@@ -207,13 +218,21 @@ document.addEventListener('DOMContentLoaded', function() {
         nameForm.addEventListener('submit', function(e) {
             e.preventDefault();
             const nameInput = document.getElementById('fullName');
+            const emailInput = document.getElementById('emailAddress');
             const name = nameInput ? nameInput.value.trim() : '';
-            if (name.length > 1) {
+            const email = emailInput ? emailInput.value.trim() : '';
+            
+            if (name.length > 1 && email && email.includes('@')) {
                 localStorage.setItem('userName', name);
+                localStorage.setItem('userEmail', email);
                 showFunnelStep(2);
                 setTimeout(() => showFunnelStep(3), 3500);
             } else {
-                alert('Please enter your full name');
+                if (name.length <= 1) {
+                    alert('Please enter your full name');
+                } else if (!email || !email.includes('@')) {
+                    alert('Please enter a valid email address');
+                }
             }
         });
     }
@@ -468,7 +487,9 @@ function showFunnelStep(step) {
 function resetFunnelModal() {
     showFunnelStep(1);
     const nameInput = document.getElementById('fullName');
+    const emailInput = document.getElementById('emailAddress');
     if (nameInput) nameInput.value = '';
+    if (emailInput) emailInput.value = '';
 }
 // Make modal globally accessible for close button
 window.closeUserFunnelModal = closeUserFunnelModal;
