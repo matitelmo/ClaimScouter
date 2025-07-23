@@ -248,6 +248,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const emailInput = document.getElementById('emailAddress');
             const full_name = nameInput ? nameInput.value.trim() : '';
             const email = emailInput ? emailInput.value.trim() : '';
+            console.log('Submitting full name:', full_name, 'for email:', email); // Debug log
             if (full_name.length > 1 && email && email.includes('@')) {
                 localStorage.setItem('userName', full_name);
                 localStorage.setItem('userEmail', email);
@@ -257,11 +258,13 @@ document.addEventListener('DOMContentLoaded', function() {
                         .from('leads')
                         .update({ full_name, funnel_finish: true })
                         .eq('email', email);
+                    console.log('Supabase update result:', error); // Debug log
                     if (error) {
                         showToast('Could not update your info. Please try again.', true);
                         return;
                     }
                 } catch (err) {
+                    console.log('Supabase update exception:', err); // Debug log
                     showToast('Network error. Please try again.', true);
                     return;
                 }
@@ -274,6 +277,15 @@ document.addEventListener('DOMContentLoaded', function() {
                     showToast('Please enter a valid email address', true);
                 }
             }
+        });
+    }
+
+    // Ensure event listener for 'toStripeBtn' is present and add debug log
+    const toStripeBtn = document.getElementById('toStripeBtn');
+    if (toStripeBtn) {
+        toStripeBtn.addEventListener('click', function() {
+            console.log('toStripeBtn clicked'); // Debug log
+            showFunnelStep(4);
         });
     }
 });
