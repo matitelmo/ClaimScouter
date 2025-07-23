@@ -193,60 +193,87 @@ function openUserFunnelModal() {
 }
 window.openUserFunnelModal = openUserFunnelModal;
 
+// === Supabase Integration ===
+// TODO: Replace with your actual Supabase project URL and anon key
+const SUPABASE_URL = 'https://djvtwpksrltlhwrkepja.supabase.co'; // <-- PUT YOUR URL HERE
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRqdnR3cGtzcmx0bGh3cmtlcGphIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTMzMDA3NDMsImV4cCI6MjA2ODg3Njc0M30.Esq52iQwv1iijWsWZBBaL-5Fl5y8VGPMF24EhiuSv6I'; // <-- PUT YOUR ANON KEY HERE
+const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+// Helper: Show a toast or alert for user feedback
+function showToast(message, isError = false) {
+    // You can replace this with a nicer UI if you want
+    alert((isError ? 'Error: ' : '') + message);
+}
+
+// --- HERO FORM: Insert email, funnel_finish: false ---
 document.addEventListener('DOMContentLoaded', function() {
-    // Hero form submit triggers funnel modal
     const heroForm = document.getElementById('emailForm');
     if (heroForm) {
-        heroForm.addEventListener('submit', function(e) {
+        heroForm.addEventListener('submit', async function(e) {
             e.preventDefault();
             const emailInput = heroForm.querySelector('input[type="email"]');
             const email = emailInput ? emailInput.value.trim() : '';
-            
             if (email && email.includes('@')) {
-                // Store email globally so modal can access it
                 window.lastEnteredEmail = email;
                 localStorage.setItem('userEmail', email);
+                // Insert into Supabase
+                try {
+                    const { error } = await supabase.from('leads').insert([
+                        { email, funnel_finish: false }
+                    ]);
+                    if (error) {
+                        if (!error.message.includes('duplicate')) {
+                            showToast('Could not save your email. Please try again.', true);
+                            return;
+                        }
+                        // If duplicate, ignore (user already exists)
+                    }
+                } catch (err) {
+                    showToast('Network error. Please try again.', true);
+                    return;
+                }
                 openUserFunnelModal();
             } else {
-                alert('Please enter a valid email address');
+                showToast('Please enter a valid email address', true);
             }
         });
     }
-    // Name capture step
+
+    // --- FULL FORM: Update with name, funnel_finish: true ---
     const nameForm = document.getElementById('nameCaptureForm');
     if (nameForm) {
-        nameForm.addEventListener('submit', function(e) {
+        nameForm.addEventListener('submit', async function(e) {
             e.preventDefault();
             const nameInput = document.getElementById('fullName');
             const emailInput = document.getElementById('emailAddress');
-            const name = nameInput ? nameInput.value.trim() : '';
+            const full_name = nameInput ? nameInput.value.trim() : '';
             const email = emailInput ? emailInput.value.trim() : '';
-            if (name.length > 1 && email && email.includes('@')) {
-                localStorage.setItem('userName', name);
+            if (full_name.length > 1 && email && email.includes('@')) {
+                localStorage.setItem('userName', full_name);
                 localStorage.setItem('userEmail', email);
+                // Update Supabase row for this email
+                try {
+                    const { error } = await supabase
+                        .from('leads')
+                        .update({ full_name, funnel_finish: true })
+                        .eq('email', email);
+                    if (error) {
+                        showToast('Could not update your info. Please try again.', true);
+                        return;
+                    }
+                } catch (err) {
+                    showToast('Network error. Please try again.', true);
+                    return;
+                }
                 showFunnelStep(2);
-                startLoadingAnimation(name);
+                startLoadingAnimation(full_name);
             } else {
-                if (name.length <= 1) {
-                    alert('Please enter your full name');
+                if (full_name.length <= 1) {
+                    showToast('Please enter your full name', true);
                 } else if (!email || !email.includes('@')) {
-                    alert('Please enter a valid email address');
+                    showToast('Please enter a valid email address', true);
                 }
             }
-        });
-    }
-    // Blurred results step: go to Stripe link step
-    const toStripeBtn = document.getElementById('toStripeBtn');
-    if (toStripeBtn) {
-        toStripeBtn.addEventListener('click', function() {
-            showFunnelStep(4);
-        });
-    }
-    // Stripe link step: go to confirmation
-    const stripeLinkBtn = document.getElementById('stripeLinkBtn');
-    if (stripeLinkBtn) {
-        stripeLinkBtn.addEventListener('click', function() {
-            showFunnelStep(5);
         });
     }
 });
@@ -346,15 +373,15 @@ function updateDots() {
 
 // Add some interactive features
 document.addEventListener('DOMContentLoaded', function() {
-    // Parallax effect for hero section
-    window.addEventListener('scroll', function() {
-        const scrolled = window.pageYOffset;
-        const hero = document.querySelector('.hero');
-        if (hero) {
-            const rate = scrolled * -0.5;
-            hero.style.transform = `translateY(${rate}px)`;
-        }
-    });
+    // Parallax effect for hero section - COMMENTED OUT to fix white space issue
+    // window.addEventListener('scroll', function() {
+    //     const scrolled = window.pageYOffset;
+    //     const hero = document.querySelector('.hero');
+    //     if (hero) {
+    //         const rate = scrolled * -0.5;
+    //         hero.style.transform = `translateY(${rate}px)`;
+    //     }
+    // });
     
     // Add hover effects to cards
     const cards = document.querySelectorAll('.step-card, .testimonial-card');
@@ -739,3 +766,39 @@ if (document.readyState === 'loading') {
 
 // Also try initializing after a short delay
 setTimeout(initializeFAQ, 1000);
+
+// Settlement Spotlight Card Modal Logic
+const modalOverlay = document.getElementById('settlementModalOverlay');
+const modal = document.getElementById('settlementModal');
+const modalTitle = document.getElementById('settlementModalTitle');
+const modalDesc = document.getElementById('settlementModalDescription');
+const modalClose = document.getElementById('settlementModalClose');
+const cards = document.querySelectorAll('.spotlight-card');
+function openSettlementModal(title, desc) {
+    modalTitle.textContent = title;
+    modalDesc.textContent = desc;
+    modalOverlay.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+}
+function closeSettlementModal() {
+    modalOverlay.style.display = 'none';
+    document.body.style.overflow = '';
+}
+cards.forEach(card => {
+    card.addEventListener('click', function(e) {
+        e.preventDefault();
+        openSettlementModal(
+            card.getAttribute('data-title'),
+            card.getAttribute('data-description')
+        );
+    });
+});
+modalClose.addEventListener('click', closeSettlementModal);
+modalOverlay.addEventListener('click', function(e) {
+    if (e.target === modalOverlay) closeSettlementModal();
+});
+document.addEventListener('keydown', function(e) {
+    if (modalOverlay.style.display === 'flex' && (e.key === 'Escape' || e.key === 'Esc')) {
+        closeSettlementModal();
+    }
+});

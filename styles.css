@@ -5249,3 +5249,52 @@ form#nameCaptureForm {
   }
 }
 /* --- End Perfectly Center Learn Section Heading and Grid --- */
+
+.value-prop {
+    padding: 3.2rem 0; /* reduced by 20% */
+}
+.value-prop-content {
+    gap: 3.2rem; /* reduced by 20% */
+}
+.value-prop h2 {
+    font-size: 1.76rem; /* reduced by 20% */
+    margin-bottom: 0.8rem;
+}
+.value-prop-description {
+    font-size: 0.88rem; /* reduced by 20% */
+    margin-bottom: 1.6rem;
+}
+.stats-container {
+    margin-top: 1.2rem;
+    margin-bottom: 1.6rem;
+    gap: 0.8rem;
+}
+.stat-number {
+    font-size: 1.44rem; /* reduced by 20% */
+}
+.chart-container {
+    padding: 1.2rem; /* reduced by 20% */
+    max-width: 320px; /* reduced by 20% */
+}
+.chart-title {
+    font-size: 0.96rem; /* reduced by 20% */
+    margin-bottom: 1.2rem;
+}
+.chart {
+    height: 200px; /* reduced by 20% */
+    margin-bottom: 1.2rem;
+    padding: 0 0.8rem;
+}
+.chart-bar {
+    width: 64px; /* reduced by 20% */
+}
+.bar-fill {
+    min-height: 48px; /* reduced by 20% */
+    padding: 0.4rem 0.2rem;
+}
+.bar-label {
+    font-size: 0.64rem; /* reduced by 20% */
+}
+.bar-amount {
+    font-size: 0.96rem; /* reduced by 20% */
+}
