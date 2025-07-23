@@ -1895,9 +1895,15 @@ p {
 }
 
 .article-list {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     gap: 1.5rem;
+}
+
+@media (max-width: 700px) {
+  .article-list {
+    grid-template-columns: 1fr;
+  }
 }
 
 .article-item {
@@ -5042,10 +5048,11 @@ form#nameCaptureForm {
   color: #222;
   transition: transform 0.22s cubic-bezier(.7,.2,.2,1), box-shadow 0.22s;
   cursor: pointer;
-  min-height: 320px;
+  min-height: 180px;
   max-width: 320px;
   margin: 0 auto;
   border: 1.5px solid #f0f1f7;
+  justify-content: center;
 }
 .spotlight-card:hover, .spotlight-card:focus {
   transform: translateY(-8px) scale(1.035);
@@ -5067,7 +5074,7 @@ form#nameCaptureForm {
 .spotlight-card h3 {
   font-size: 1.22rem;
   font-weight: 700;
-  margin: 0.5rem 0 0.7rem 0;
+  margin: 0 0 0.7rem 0;
   color: #3b3663;
 }
 .spotlight-card p {
@@ -5101,3 +5108,144 @@ form#nameCaptureForm {
   }
 }
 /* --- End Enhanced Settlement Spotlight Section Styles --- */
+
+/* --- Settlement Spotlight Icon Styles --- */
+.spotlight-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.5rem;
+  min-height: 2.5rem;
+}
+#settlementModalIcon {
+  margin-top: 0.5rem;
+}
+.modal-overlay {
+  z-index: 10000;
+}
+/* --- End Settlement Spotlight Icon Styles --- */
+
+/* --- Center Educational Resources Section --- */
+.learn-articles {
+  max-width: 700px;
+  margin: 0 auto 0 auto;
+  text-align: center;
+}
+.learn-articles h3 {
+  text-align: center;
+}
+.article-list {
+  justify-items: center;
+}
+/* --- End Center Educational Resources Section --- */
+
+/* --- Wide 4-Column Educational Resources Grid --- */
+.learn-articles {
+  margin: 0 auto 0 auto;
+  text-align: center;
+  max-width: none;
+}
+.learn-articles h3 {
+  text-align: center;
+}
+.article-list {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  justify-items: stretch;
+}
+@media (max-width: 1100px) {
+  .article-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 700px) {
+  .article-list {
+    grid-template-columns: 1fr;
+  }
+}
+/* --- End Wide 4-Column Educational Resources Grid --- */
+
+/* --- Centered 4-Column Educational Resources Grid --- */
+.article-list {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  justify-items: stretch;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+/* --- End Centered 4-Column Educational Resources Grid --- */
+
+/* --- Ensure Educational Resources Grid is Fully Centered and Wide --- */
+.learn-content {
+  width: 100%;
+  max-width: none;
+  padding: 0;
+}
+.learn-articles {
+  width: 100%;
+  max-width: none;
+  margin: 0 auto;
+  text-align: center;
+}
+.article-list {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  justify-items: stretch;
+}
+/* --- End Ensure Educational Resources Grid is Fully Centered and Wide --- */
+
+/* --- Fix Centering of Educational Resources Grid --- */
+.learn > .container {
+  width: auto;
+  max-width: 1200px;
+  padding-left: 20px;
+  padding-right: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  transform: none;
+}
+.article-list {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  justify-items: stretch;
+  transform: none;
+}
+/* --- End Fix Centering of Educational Resources Grid --- */
+
+/* --- Perfectly Center Learn Section Heading and Grid --- */
+.learn-header {
+  max-width: 1200px;
+  margin: 0 auto 2.5rem auto;
+  width: 100%;
+  text-align: center;
+}
+.article-list {
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  justify-items: stretch;
+}
+@media (max-width: 1100px) {
+  .article-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 700px) {
+  .article-list {
+    grid-template-columns: 1fr;
+  }
+}
+/* --- End Perfectly Center Learn Section Heading and Grid --- */
