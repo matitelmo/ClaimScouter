@@ -193,99 +193,60 @@ function openUserFunnelModal() {
 }
 window.openUserFunnelModal = openUserFunnelModal;
 
-// === Supabase Integration ===
-// TODO: Replace with your actual Supabase project URL and anon key
-const SUPABASE_URL = 'https://djvtwpksrltlhwrkepja.supabase.co'; // <-- PUT YOUR URL HERE
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRqdnR3cGtzcmx0bGh3cmtlcGphIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTMzMDA3NDMsImV4cCI6MjA2ODg3Njc0M30.Esq52iQwv1iijWsWZBBaL-5Fl5y8VGPMF24EhiuSv6I'; // <-- PUT YOUR ANON KEY HERE
-const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-// Helper: Show a toast or alert for user feedback
-function showToast(message, isError = false) {
-    // You can replace this with a nicer UI if you want
-    alert((isError ? 'Error: ' : '') + message);
-}
-
-// --- HERO FORM: Insert email, funnel_finish: false ---
 document.addEventListener('DOMContentLoaded', function() {
+    // Hero form submit triggers funnel modal
     const heroForm = document.getElementById('emailForm');
     if (heroForm) {
-        heroForm.addEventListener('submit', async function(e) {
+        heroForm.addEventListener('submit', function(e) {
             e.preventDefault();
             const emailInput = heroForm.querySelector('input[type="email"]');
             const email = emailInput ? emailInput.value.trim() : '';
+            
             if (email && email.includes('@')) {
+                // Store email globally so modal can access it
                 window.lastEnteredEmail = email;
                 localStorage.setItem('userEmail', email);
-                // Insert into Supabase
-                try {
-                    const { error } = await supabase.from('leads').insert([
-                        { email, funnel_finish: false }
-                    ]);
-                    if (error) {
-                        if (!error.message.includes('duplicate')) {
-                            showToast('Could not save your email. Please try again.', true);
-                            return;
-                        }
-                        // If duplicate, ignore (user already exists)
-                    }
-                } catch (err) {
-                    showToast('Network error. Please try again.', true);
-                    return;
-                }
                 openUserFunnelModal();
             } else {
-                showToast('Please enter a valid email address', true);
+                alert('Please enter a valid email address');
             }
         });
     }
-
-    // --- FULL FORM: Update with name, funnel_finish: true ---
+    // Name capture step
     const nameForm = document.getElementById('nameCaptureForm');
     if (nameForm) {
-        nameForm.addEventListener('submit', async function(e) {
+        nameForm.addEventListener('submit', function(e) {
             e.preventDefault();
             const nameInput = document.getElementById('fullName');
             const emailInput = document.getElementById('emailAddress');
-            const full_name = nameInput ? nameInput.value.trim() : '';
+            const name = nameInput ? nameInput.value.trim() : '';
             const email = emailInput ? emailInput.value.trim() : '';
-            console.log('Submitting full name:', full_name, 'for email:', email); // Debug log
-            if (full_name.length > 1 && email && email.includes('@')) {
-                localStorage.setItem('userName', full_name);
+            if (name.length > 1 && email && email.includes('@')) {
+                localStorage.setItem('userName', name);
                 localStorage.setItem('userEmail', email);
-                // Update Supabase row for this email
-                try {
-                    const { error } = await supabase
-                        .from('leads')
-                        .update({ full_name, funnel_finish: true })
-                        .eq('email', email);
-                    console.log('Supabase update result:', error); // Debug log
-                    if (error) {
-                        showToast('Could not update your info. Please try again.', true);
-                        return;
-                    }
-                } catch (err) {
-                    console.log('Supabase update exception:', err); // Debug log
-                    showToast('Network error. Please try again.', true);
-                    return;
-                }
                 showFunnelStep(2);
-                startLoadingAnimation(full_name);
+                startLoadingAnimation(name);
             } else {
-                if (full_name.length <= 1) {
-                    showToast('Please enter your full name', true);
+                if (name.length <= 1) {
+                    alert('Please enter your full name');
                 } else if (!email || !email.includes('@')) {
-                    showToast('Please enter a valid email address', true);
+                    alert('Please enter a valid email address');
                 }
             }
         });
     }
-
-    // Ensure event listener for 'toStripeBtn' is present and add debug log
+    // Blurred results step: go to Stripe link step
     const toStripeBtn = document.getElementById('toStripeBtn');
     if (toStripeBtn) {
         toStripeBtn.addEventListener('click', function() {
-            console.log('toStripeBtn clicked'); // Debug log
             showFunnelStep(4);
+        });
+    }
+    // Stripe link step: go to confirmation
+    const stripeLinkBtn = document.getElementById('stripeLinkBtn');
+    if (stripeLinkBtn) {
+        stripeLinkBtn.addEventListener('click', function() {
+            showFunnelStep(5);
         });
     }
 });
