@@ -221,12 +221,11 @@ document.addEventListener('DOMContentLoaded', function() {
             const emailInput = document.getElementById('emailAddress');
             const name = nameInput ? nameInput.value.trim() : '';
             const email = emailInput ? emailInput.value.trim() : '';
-            
             if (name.length > 1 && email && email.includes('@')) {
                 localStorage.setItem('userName', name);
                 localStorage.setItem('userEmail', email);
                 showFunnelStep(2);
-                setTimeout(() => showFunnelStep(3), 3500);
+                startLoadingAnimation(name);
             } else {
                 if (name.length <= 1) {
                     alert('Please enter your full name');
@@ -493,6 +492,189 @@ function resetFunnelModal() {
 }
 // Make modal globally accessible for close button
 window.closeUserFunnelModal = closeUserFunnelModal;
+
+// --- Animated Loading Sequence Logic ---
+function startLoadingAnimation(userName) {
+    // Hide all phases
+    document.querySelectorAll('.loading-phase').forEach(el => el.style.display = 'none');
+    // Phase 1: Typing
+    const searchBarPhase = document.getElementById('searchBarPhase');
+    const typedName = document.getElementById('typedName');
+    const cursor = searchBarPhase.querySelector('.blinking-cursor');
+    searchBarPhase.style.display = 'block';
+    typedName.textContent = '';
+    cursor.style.display = 'inline-block';
+    let i = 0;
+    const typeSpeed = Math.max(60, 1200 / Math.max(userName.length, 6));
+    function typeChar() {
+        if (i < userName.length) {
+            typedName.textContent += userName.charAt(i);
+            i++;
+            setTimeout(typeChar, typeSpeed);
+        } else {
+            setTimeout(() => {
+                // Phase 2: Database Scan
+                searchBarPhase.style.opacity = 1;
+                searchBarPhase.style.transition = 'opacity 0.5s';
+                searchBarPhase.style.opacity = 0;
+                setTimeout(() => {
+                    searchBarPhase.style.display = 'none';
+                    showDbScanPhase();
+                }, 500);
+            }, 400);
+        }
+    }
+    setTimeout(typeChar, 300);
+}
+function showDbScanPhase() {
+    const dbScanPhase = document.getElementById('dbScanPhase');
+    dbScanPhase.style.display = 'block';
+    dbScanPhase.style.opacity = 0;
+    dbScanPhase.style.transition = 'opacity 0.5s';
+    setTimeout(() => { dbScanPhase.style.opacity = 1; }, 10);
+    // Animate scan lines
+    const scanLines = document.getElementById('scanLines');
+    scanLines.innerHTML = '';
+    let lines = [
+        'SELECT * FROM claims WHERE user = ? ...',
+        'Scanning settlements: 1,204 found',
+        'Matching: Data Privacy, Overdraft, Refunds...',
+        'Checking eligibility...',
+        'Analyzing payout history...'
+    ];
+    let idx = 0;
+    function showLine() {
+        if (idx < lines.length) {
+            const line = document.createElement('div');
+            line.textContent = lines[idx];
+            line.style.opacity = 0;
+            scanLines.appendChild(line);
+            setTimeout(() => { line.style.opacity = 1; }, 50);
+            idx++;
+            setTimeout(showLine, 250);
+        }
+    }
+    showLine();
+    // Animate network graph
+    renderNetworkGraph();
+    setTimeout(() => {
+        dbScanPhase.style.opacity = 1;
+        dbScanPhase.style.transition = 'opacity 0.5s';
+        dbScanPhase.style.opacity = 0;
+        setTimeout(() => {
+            dbScanPhase.style.display = 'none';
+            showCardsPhase();
+        }, 500);
+    }, 2000);
+}
+function renderNetworkGraph() {
+    const graph = document.getElementById('networkGraph');
+    graph.innerHTML = '';
+    // 4 nodes, connected
+    const nodes = [
+        {x:10, y:30}, {x:60, y:10}, {x:110, y:30}, {x:60, y:50}
+    ];
+    nodes.forEach((n, i) => {
+        const node = document.createElement('div');
+        node.className = 'network-node';
+        node.style.left = n.x+'px';
+        node.style.top = n.y+'px';
+        node.style.animationDelay = (i*0.2)+'s';
+        graph.appendChild(node);
+    });
+    // Links
+    const links = [ [0,1],[1,2],[2,3],[3,0],[1,3] ];
+    links.forEach(([a,b]) => {
+        const n1 = nodes[a], n2 = nodes[b];
+        const link = document.createElement('div');
+        link.className = 'network-link';
+        const dx = n2.x-n1.x, dy = n2.y-n1.y;
+        const len = Math.sqrt(dx*dx+dy*dy);
+        link.style.left = n1.x+8+'px';
+        link.style.top = n1.y+8+'px';
+        link.style.width = len+'px';
+        link.style.transform = 'rotate('+(Math.atan2(dy,dx)*180/Math.PI)+'deg)';
+        graph.appendChild(link);
+    });
+}
+function showCardsPhase() {
+    const cardsPhase = document.getElementById('cardsPhase');
+    cardsPhase.style.display = 'block';
+    cardsPhase.style.opacity = 0;
+    cardsPhase.style.transition = 'opacity 0.5s';
+    setTimeout(() => { cardsPhase.style.opacity = 1; }, 10);
+    // Animate cards flying in
+    const cards = [
+        {el: document.getElementById('card1'), from:'left'},
+        {el: document.getElementById('card2'), from:'right'},
+        {el: document.getElementById('card3'), from:'top'},
+        {el: document.getElementById('card4'), from:'bottom'}
+    ];
+    const positions = {
+        left: 'translate(-220px, 0)',
+        right: 'translate(220px, 0)',
+        top: 'translate(0, -90px)',
+        bottom: 'translate(0, 90px)'
+    };
+    cards.forEach((c, i) => {
+        c.el.style.opacity = 0;
+        c.el.style.transform = positions[c.from];
+        c.el.classList.remove('blurred');
+        setTimeout(() => {
+            c.el.style.transition = 'transform 0.7s cubic-bezier(.7,.2,.2,1), opacity 0.5s';
+            c.el.style.opacity = 1;
+            c.el.style.transform = 'translate(0,0)';
+        }, 200 + i*180);
+    });
+    // After all cards in, blur them
+    setTimeout(() => {
+        cards.forEach((c, i) => {
+            setTimeout(() => {
+                c.el.classList.add('blurred');
+            }, i*120);
+        });
+    }, 1100);
+    // Transition to blurred results
+    setTimeout(() => {
+        cardsPhase.style.opacity = 1;
+        cardsPhase.style.transition = 'opacity 0.5s';
+        cardsPhase.style.opacity = 0;
+        setTimeout(() => {
+            cardsPhase.style.display = 'none';
+            showFunnelStep(3);
+        }, 500);
+    }, 1800);
+}
+
+// Mobile menu toggle functionality
+function toggleMobileMenu() {
+    const nav = document.querySelector('.nav');
+    const toggle = document.querySelector('.mobile-menu-toggle');
+    
+    if (nav && toggle) {
+        const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
+        
+        if (isExpanded) {
+            nav.classList.remove('active');
+            toggle.setAttribute('aria-expanded', 'false');
+        } else {
+            nav.classList.add('active');
+            toggle.setAttribute('aria-expanded', 'true');
+        }
+    }
+}
+
+// Scroll to top functionality
+function scrollToTop() {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+}
+
+// Make functions globally accessible
+window.toggleMobileMenu = toggleMobileMenu;
+window.scrollToTop = scrollToTop;
 
 // Backup FAQ initialization
 function initializeFAQ() {

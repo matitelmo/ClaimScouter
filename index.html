@@ -1037,10 +1037,32 @@
                 <!-- Step 2: Loading Animation -->
                 <div class="modal-step" id="funnelStep2" style="display:none; text-align:center;">
                     <h2>Searching for Claims...</h2>
-                    <div class="loading-spinner" style="margin:2rem auto;">
-                        <i class="fas fa-spinner fa-spin" style="font-size:2.5rem;"></i>
+                    <div id="loadingAnimationContainer">
+                        <!-- Phase 1: Typing Search Bar -->
+                        <div id="searchBarPhase" class="loading-phase" style="display:none;">
+                            <div class="search-bar-anim">
+                                <span class="search-bar-label">Searching for:</span>
+                                <span class="search-bar-input"><span id="typedName"></span><span class="blinking-cursor">|</span></span>
+                            </div>
+                        </div>
+                        <!-- Phase 2: Database Scan -->
+                        <div id="dbScanPhase" class="loading-phase" style="display:none;">
+                            <div class="db-scan-visual">
+                                <div class="scan-lines" id="scanLines"></div>
+                                <div class="network-graph" id="networkGraph"></div>
+                            </div>
+                        </div>
+                        <!-- Phase 3: Flying Cards -->
+                        <div id="cardsPhase" class="loading-phase" style="display:none;">
+                            <div class="flying-cards-container">
+                                <div class="flying-card" id="card1">Claim A</div>
+                                <div class="flying-card" id="card2">Claim B</div>
+                                <div class="flying-card" id="card3">Claim C</div>
+                                <div class="flying-card" id="card4">Claim D</div>
+                            </div>
+                        </div>
                     </div>
-                    <p>We're checking our database for potential settlements you may be eligible for.</p>
+                    <p id="loadingSubtext">We're checking our database for potential settlements you may be eligible for.</p>
                     <div class="trust-badge">
                         <i class="fas fa-check-circle"></i> SOC 2 & GDPR Compliant
                     </div>
