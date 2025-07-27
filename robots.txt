@@ -1,0 +1,10 @@
+# This line specifies the rules apply to all user-agents (search engine bots).
+User-agent: *
+
+# This line allows bots to crawl everything on your site.
+Allow: /
+
+# This line tells bots the location of your sitemap.
+# It is very important for helping Google find all your pages.
+# Updated for Vercel deployment
+Sitemap: https://www.claimscouter.com/sitemap.xml
