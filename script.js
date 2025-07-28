@@ -180,13 +180,24 @@ function openUserFunnelModal() {
     if (modal) {
         modal.classList.add('active');
         document.body.style.overflow = 'hidden';
-        showFunnelStep(1);
         
-        // Auto-populate email using the global variable
-        if (window.lastEnteredEmail) {
-            const modalEmailInput = document.getElementById('emailAddress');
-            if (modalEmailInput) {
-                modalEmailInput.value = window.lastEnteredEmail;
+        // Check if user has already completed the funnel
+        const hasCompletedFunnel = localStorage.getItem('funnelCompleted');
+        
+        if (hasCompletedFunnel === 'true') {
+            // User has already completed the funnel, show thank you step directly
+            console.log('User has completed funnel before, showing thank you step directly');
+            showFunnelStep(5);
+        } else {
+            // First time user, start from step 1
+            showFunnelStep(1);
+            
+            // Auto-populate email using the global variable
+            if (window.lastEnteredEmail) {
+                const modalEmailInput = document.getElementById('emailAddress');
+                if (modalEmailInput) {
+                    modalEmailInput.value = window.lastEnteredEmail;
+                }
             }
         }
     }
@@ -247,6 +258,9 @@ document.addEventListener('DOMContentLoaded', function() {
     if (stripeLinkBtn) {
         stripeLinkBtn.addEventListener('click', function() {
             showFunnelStep(5);
+            // Mark funnel as completed
+            localStorage.setItem('funnelCompleted', 'true');
+            console.log('Funnel marked as completed');
         });
     }
 });
@@ -469,6 +483,14 @@ document.addEventListener('DOMContentLoaded', function() {
 function closeUserFunnelModal() {
     const modal = document.getElementById('userFunnelModal');
     if (modal) {
+        // Check if we're currently on step 5 (thank you step)
+        const step5 = document.getElementById('funnelStep5');
+        if (step5 && step5.style.display !== 'none') {
+            // User is closing from step 5, mark funnel as completed
+            localStorage.setItem('funnelCompleted', 'true');
+            console.log('Funnel marked as completed (closing from step 5)');
+        }
+        
         modal.classList.remove('active');
         document.body.style.overflow = 'auto';
         resetFunnelModal();
@@ -492,6 +514,12 @@ function resetFunnelModal() {
 }
 // Make modal globally accessible for close button
 window.closeUserFunnelModal = closeUserFunnelModal;
+
+// Utility function to reset funnel completion status (for testing or admin use)
+window.resetFunnelCompletion = function() {
+    localStorage.removeItem('funnelCompleted');
+    console.log('Funnel completion status reset');
+};
 
 // --- Animated Loading Sequence Logic ---
 function startLoadingAnimation(userName) {
