@@ -2107,22 +2107,41 @@ p {
 }
 
 .modal-header {
-    padding: 1rem 1.5rem;
+    padding: 0;
     border-bottom: 1px solid #e2e8f0;
-    background: linear-gradient(135deg, #f8fafc 0%, #edf2f7 100%);
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     border-radius: 20px 20px 0 0;
+    width: 100%;
+    margin: 0;
 }
 
 .modal-header-content {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 1rem 1.5rem;
 }
 
 .modal-title {
     font-size: 1.125rem;
     font-weight: 600;
-    color: #1a1a1a;
+    color: white;
+}
+
+.modal-title .logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.modal-title .logo-text {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: white;
+    background: none;
+    -webkit-background-clip: unset;
+    -webkit-text-fill-color: unset;
+    background-clip: unset;
 }
 
 .modal-close {
@@ -2130,7 +2149,7 @@ p {
     border: none;
     font-size: 1.25rem;
     cursor: pointer;
-    color: #64748b;
+    color: rgba(255, 255, 255, 0.8);
     padding: 0.5rem;
     border-radius: 4px;
     transition: all 0.2s ease;
@@ -2142,8 +2161,8 @@ p {
 }
 
 .modal-close:hover {
-    background: #f1f5f9;
-    color: #1a1a1a;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
 }
 
 .progress-bar {
@@ -3352,7 +3371,17 @@ p {
     }
     
     .modal-header {
+        padding: 0;
+        width: 100%;
+        margin: 0;
+    }
+    
+    .modal-header-content {
         padding: 1rem;
+    }
+    
+    .modal-title .logo-text {
+        font-size: 1.2rem;
     }
     
     .progress-step {
