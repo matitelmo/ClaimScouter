@@ -244,10 +244,14 @@ document.addEventListener('DOMContentLoaded', function() {
     if (nameForm) {
         nameForm.addEventListener('submit', async function(e) {
             e.preventDefault();
+            console.log('=== FRONTEND: Name capture form submitted ===');
+            
             const nameInput = document.getElementById('fullName');
             const emailInput = document.getElementById('emailAddress');
             const name = nameInput ? nameInput.value.trim() : '';
             const email = emailInput ? emailInput.value.trim() : '';
+            
+            console.log('Form data:', { name, email });
             
             if (name.length > 1 && email && email.includes('@')) {
                 // Store data locally
@@ -255,46 +259,76 @@ document.addEventListener('DOMContentLoaded', function() {
                 localStorage.setItem('userEmail', email);
                 
                 // Show loading animation immediately
+                console.log('Showing loading animation...');
                 showFunnelStep(2);
                 startLoadingAnimation(name);
                 
                 try {
                     // Send data to backend
+                    const requestBody = {
+                        name: name,
+                        email: email,
+                        source: 'modal_funnel'
+                    };
+                    
+                    console.log('Sending request to /api/signup');
+                    console.log('Request body:', requestBody);
+                    
                     const response = await fetch('/api/signup', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
                         },
-                        body: JSON.stringify({
-                            name: name,
-                            email: email,
-                            source: 'modal_funnel'
-                        })
+                        body: JSON.stringify(requestBody)
                     });
                     
-                    const data = await response.json();
+                    console.log('Response status:', response.status);
+                    console.log('Response headers:', response.headers);
+                    
+                    let data;
+                    try {
+                        data = await response.json();
+                        console.log('Response data:', data);
+                    } catch (jsonError) {
+                        console.error('Failed to parse response as JSON:', jsonError);
+                        console.error('Response text:', await response.text());
+                        throw new Error('Invalid response format');
+                    }
                     
                     if (data.success) {
                         // Store the actual position
                         window.actualWaitlistPosition = data.position;
-                        console.log('Successfully added to waitlist at position:', data.position);
+                        console.log('SUCCESS: Added to waitlist at position:', data.position);
+                        console.log('Full success response:', data);
                     } else {
                         // Log error but continue with the flow
-                        console.error('Failed to add to waitlist:', data.error);
+                        console.error('ERROR: Failed to add to waitlist:', data.error);
+                        console.error('Full error response:', data);
                         
                         // If email already exists, still continue with the flow
                         if (data.error && data.error.includes('already on the waitlist')) {
-                            console.log('User already on waitlist, continuing...');
+                            console.log('User already on waitlist, continuing with flow...');
                         }
                     }
                 } catch (error) {
                     // Log error but don't break the user experience
-                    console.error('Network error adding to waitlist:', error);
+                    console.error('=== NETWORK ERROR ===');
+                    console.error('Error type:', error.name);
+                    console.error('Error message:', error.message);
+                    console.error('Error stack:', error.stack);
+                    console.error('Full error object:', error);
                 }
                 
+                console.log('Continuing with funnel flow regardless of API result...');
                 // Continue with the flow regardless of API result
                 // The loading animation will complete and move to step 3
             } else {
+                console.log('Validation failed:', {
+                    nameLength: name.length,
+                    hasEmail: !!email,
+                    emailValid: email.includes('@')
+                });
+                
                 if (name.length <= 1) {
                     alert('Please enter your full name');
                 } else if (!email || !email.includes('@')) {
