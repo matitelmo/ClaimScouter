@@ -1,0 +1,19 @@
+{
+  "name": "claimscouter",
+  "version": "1.0.0",
+  "description": "ClaimScouter - Automated class action settlement claims",
+  "main": "index.js",
+  "scripts": {
+    "build": "echo 'No build required'",
+    "deploy": "vercel --prod"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.39.0"
+  },
+  "devDependencies": {
+    "vercel": "^32.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+} 

@@ -13,6 +13,22 @@ window.handleHeroEmailSubmit = function(event) {
         if (email && email.includes('@')) {
             console.log('Valid email, storing and opening modal');
             localStorage.setItem('userEmail', email);
+            
+            // Try to submit email-only signup to backend
+            fetch('/api/signup', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    name: 'Not Provided', // Default name for hero form
+                    email: email,
+                    source: 'hero_form'
+                })
+            }).catch(error => {
+                console.error('Failed to submit hero form email:', error);
+            });
+            
             window.openOnboardingModal();
             
             setTimeout(() => {
@@ -226,17 +242,58 @@ document.addEventListener('DOMContentLoaded', function() {
     // Name capture step
     const nameForm = document.getElementById('nameCaptureForm');
     if (nameForm) {
-        nameForm.addEventListener('submit', function(e) {
+        nameForm.addEventListener('submit', async function(e) {
             e.preventDefault();
             const nameInput = document.getElementById('fullName');
             const emailInput = document.getElementById('emailAddress');
             const name = nameInput ? nameInput.value.trim() : '';
             const email = emailInput ? emailInput.value.trim() : '';
+            
             if (name.length > 1 && email && email.includes('@')) {
+                // Store data locally
                 localStorage.setItem('userName', name);
                 localStorage.setItem('userEmail', email);
+                
+                // Show loading animation immediately
                 showFunnelStep(2);
                 startLoadingAnimation(name);
+                
+                try {
+                    // Send data to backend
+                    const response = await fetch('/api/signup', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            name: name,
+                            email: email,
+                            source: 'modal_funnel'
+                        })
+                    });
+                    
+                    const data = await response.json();
+                    
+                    if (data.success) {
+                        // Store the actual position
+                        window.actualWaitlistPosition = data.position;
+                        console.log('Successfully added to waitlist at position:', data.position);
+                    } else {
+                        // Log error but continue with the flow
+                        console.error('Failed to add to waitlist:', data.error);
+                        
+                        // If email already exists, still continue with the flow
+                        if (data.error && data.error.includes('already on the waitlist')) {
+                            console.log('User already on waitlist, continuing...');
+                        }
+                    }
+                } catch (error) {
+                    // Log error but don't break the user experience
+                    console.error('Network error adding to waitlist:', error);
+                }
+                
+                // Continue with the flow regardless of API result
+                // The loading animation will complete and move to step 3
             } else {
                 if (name.length <= 1) {
                     alert('Please enter your full name');
@@ -503,7 +560,17 @@ function showFunnelStep(step) {
         if (el) el.style.display = 'none';
     });
     const current = document.getElementById(`funnelStep${step}`);
-    if (current) current.style.display = 'block';
+    if (current) {
+        current.style.display = 'block';
+        
+        // If showing step 5 and we have an actual position, update it
+        if (step === 5 && window.actualWaitlistPosition) {
+            const positionElement = document.getElementById('waitlistNumber');
+            if (positionElement) {
+                positionElement.textContent = window.actualWaitlistPosition;
+            }
+        }
+    }
 }
 function resetFunnelModal() {
     showFunnelStep(1);
