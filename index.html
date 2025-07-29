@@ -1002,13 +1002,14 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
                         <form id="nameCaptureForm">
                             <div class="form-group">
                                 <label for="fullName">Full Name</label>
-                                <input type="text" id="fullName" placeholder="Enter your full name" required>
+                                <input type="text" id="fullName" placeholder="Enter your full name (first and last name)" required>
+                                <!-- REMOVED: validation message div -->
                             </div>
                             <div class="form-group">
                                 <label for="emailAddress">Email Address</label>
                                 <input type="email" id="emailAddress" placeholder="Enter your email address" required>
                             </div>
-                            <button type="submit" class="btn btn-primary btn-large">
+                            <button type="submit" class="btn btn-primary btn-large" id="submitBtn">
                                 <i class="fas fa-search"></i>
                                 Find My Claims
                             </button>

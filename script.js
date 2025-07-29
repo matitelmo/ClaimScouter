@@ -242,18 +242,60 @@ document.addEventListener('DOMContentLoaded', function() {
     // Name capture step
     const nameForm = document.getElementById('nameCaptureForm');
     if (nameForm) {
+        const nameInput = document.getElementById('fullName');
+        const emailInput = document.getElementById('emailAddress');
+        const submitBtn = document.getElementById('submitBtn');
+        
+        // Function to validate name (no numbers, more than 6 chars, has space)
+        function validateName(name) {
+            const trimmedName = name.trim();
+            const hasNumbers = /\d/.test(trimmedName);
+            const hasSpace = trimmedName.includes(' ');
+            const isLongEnough = trimmedName.length > 6;
+            
+            return !hasNumbers && hasSpace && isLongEnough;
+        }
+        
+        // Simple input listeners - NO validation at all during typing
+        if (nameInput) {
+            nameInput.addEventListener('input', function() {
+                // Do nothing - no validation, no button state updates
+                // Just let the user type freely
+            });
+        }
+        
+        if (emailInput) {
+            emailInput.addEventListener('input', function() {
+                // Do nothing - no validation, no button state updates
+                // Just let the user type freely
+            });
+        }
+        
+        // Enable submit button always - let form submission handle validation
+        if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.style.opacity = '1';
+            submitBtn.style.cursor = 'pointer';
+        }
+        
         nameForm.addEventListener('submit', async function(e) {
             e.preventDefault();
+            e.stopPropagation(); // Prevent event bubbling
             console.log('=== FRONTEND: Name capture form submitted ===');
             
-            const nameInput = document.getElementById('fullName');
-            const emailInput = document.getElementById('emailAddress');
             const name = nameInput ? nameInput.value.trim() : '';
             const email = emailInput ? emailInput.value.trim() : '';
             
             console.log('Form data:', { name, email });
+            console.log('Validation check:', {
+                nameLength: name.length,
+                hasSpace: name.includes(' '),
+                hasNumbers: /\d/.test(name),
+                nameValid: validateName(name),
+                emailValid: email && email.includes('@')
+            });
             
-            if (name.length > 1 && email && email.includes('@')) {
+            if (validateName(name) && email && email.includes('@')) {
                 // Store data locally
                 localStorage.setItem('userName', name);
                 localStorage.setItem('userEmail', email);
@@ -323,17 +365,26 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Continue with the flow regardless of API result
                 // The loading animation will complete and move to step 3
             } else {
-                console.log('Validation failed:', {
-                    nameLength: name.length,
-                    hasEmail: !!email,
-                    emailValid: email.includes('@')
-                });
+                console.log('Validation failed - showing error message');
                 
-                if (name.length <= 1) {
-                    alert('Please enter your full name');
+                // REMOVE the validation message display on the modal
+                // Only show the alert popup, not the red text on the form
+                
+                // Show specific error message ONLY as alert
+                if (/\d/.test(name)) {
+                    alert('Please enter your name without numbers');
+                } else if (!name.includes(' ')) {
+                    alert('Please enter both your first and last name');
+                } else if (name.length <= 6) {
+                    alert('Please enter your full name (minimum 6 characters)');
                 } else if (!email || !email.includes('@')) {
                     alert('Please enter a valid email address');
+                } else {
+                    alert('Please enter your full name (first and last name)');
                 }
+                
+                // Keep modal open by not calling any close functions
+                return false;
             }
         });
     }
@@ -626,6 +677,10 @@ window.resetFunnelCompletion = function() {
 function startLoadingAnimation(userName) {
     // Hide all phases
     document.querySelectorAll('.loading-phase').forEach(el => el.style.display = 'none');
+    
+    // Get user email from localStorage
+    const userEmail = localStorage.getItem('userEmail') || 'user@example.com';
+    
     // Phase 1: Typing
     const searchBarPhase = document.getElementById('searchBarPhase');
     const typedName = document.getElementById('typedName');
@@ -633,11 +688,15 @@ function startLoadingAnimation(userName) {
     searchBarPhase.style.display = 'block';
     typedName.textContent = '';
     cursor.style.display = 'inline-block';
+    
+    // Create search query with name and email
+    const searchQuery = `${userName} (${userEmail})`;
+    
     let i = 0;
-    const typeSpeed = Math.max(60, 1200 / Math.max(userName.length, 6));
+    const typeSpeed = Math.max(60, 1200 / Math.max(searchQuery.length, 6));
     function typeChar() {
-        if (i < userName.length) {
-            typedName.textContent += userName.charAt(i);
+        if (i < searchQuery.length) {
+            typedName.textContent += searchQuery.charAt(i);
             i++;
             setTimeout(typeChar, typeSpeed);
         } else {
@@ -661,17 +720,54 @@ function showDbScanPhase() {
     dbScanPhase.style.opacity = 0;
     dbScanPhase.style.transition = 'opacity 0.5s';
     setTimeout(() => { dbScanPhase.style.opacity = 1; }, 10);
-    // Animate scan lines
+    
+    // Add progress bar
+    const progressBar = document.createElement('div');
+    progressBar.id = 'searchProgress';
+    progressBar.style.cssText = `
+        width: 100%;
+        height: 4px;
+        background: #e2e8f0;
+        border-radius: 2px;
+        margin: 10px 0;
+        overflow: hidden;
+    `;
+    const progressFill = document.createElement('div');
+    progressFill.style.cssText = `
+        height: 100%;
+        background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+        width: 0%;
+        transition: width 0.3s ease;
+        border-radius: 2px;
+    `;
+    progressBar.appendChild(progressFill);
+    dbScanPhase.insertBefore(progressBar, dbScanPhase.firstChild);
+    
+    // Animate scan lines with enhanced messages
     const scanLines = document.getElementById('scanLines');
     scanLines.innerHTML = '';
+    
     let lines = [
-        'SELECT * FROM claims WHERE user = ? ...',
-        'Scanning settlements: 1,204 found',
-        'Matching: Data Privacy, Overdraft, Refunds...',
-        'Checking eligibility...',
-        'Analyzing payout history...'
+        'Searching through 500+ databases...',
+        'Checking 1,247 active settlements...',
+        'Scanning: Data Privacy, Overdraft, Refunds...',
+        'Cross-referencing with 89 government agencies...',
+        'Checking Facebook settlement eligibility...',
+        'Verifying Equifax breach claims...',
+        'Scanning Wells Fargo overdraft settlements...',
+        'Running fuzzy name matching algorithms...',
+        'Checking claims from 2018-2024...',
+        'Validating claim deadlines and statutes...',
+        'Cross-referencing SSN patterns...',
+        'Analyzing payout history across platforms...',
+        'Verifying statute of limitations...',
+        'Found potential matches in 3 categories...',
+        'Calculating estimated settlement values...'
     ];
+    
     let idx = 0;
+    let progress = 0;
+    
     function showLine() {
         if (idx < lines.length) {
             const line = document.createElement('div');
@@ -679,13 +775,37 @@ function showDbScanPhase() {
             line.style.opacity = 0;
             scanLines.appendChild(line);
             setTimeout(() => { line.style.opacity = 1; }, 50);
+            
+            // Update progress bar
+            progress = ((idx + 1) / lines.length) * 100;
+            progressFill.style.width = progress + '%';
+            
+            // Add progress percentage
+            const progressText = document.createElement('div');
+            progressText.textContent = `Searching... ${Math.round(progress)}% complete`;
+            progressText.style.cssText = `
+                font-size: 0.875rem;
+                color: #6b7280;
+                text-align: center;
+                margin-top: 5px;
+            `;
+            
+            // Remove previous progress text
+            const prevProgress = dbScanPhase.querySelector('.progress-text');
+            if (prevProgress) prevProgress.remove();
+            
+            progressText.className = 'progress-text';
+            dbScanPhase.appendChild(progressText);
+            
             idx++;
-            setTimeout(showLine, 250);
+            setTimeout(showLine, 200);
         }
     }
     showLine();
+    
     // Animate network graph
     renderNetworkGraph();
+    
     setTimeout(() => {
         dbScanPhase.style.opacity = 1;
         dbScanPhase.style.transition = 'opacity 0.5s';
@@ -694,7 +814,7 @@ function showDbScanPhase() {
             dbScanPhase.style.display = 'none';
             showCardsPhase();
         }, 500);
-    }, 2000);
+    }, 3500); // Increased duration for more messages
 }
 function renderNetworkGraph() {
     const graph = document.getElementById('networkGraph');
