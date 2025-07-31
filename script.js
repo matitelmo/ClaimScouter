@@ -15,6 +15,9 @@ window.handleHeroEmailSubmit = function(event) {
             localStorage.setItem('userEmail', email);
             
             // Try to submit email-only signup to backend
+            const referralSource = getReferralSource();
+            console.log('Referral source:', referralSource);
+            
             fetch('/api/signup', {
                 method: 'POST',
                 headers: {
@@ -23,7 +26,9 @@ window.handleHeroEmailSubmit = function(event) {
                 body: JSON.stringify({
                     name: 'Not Provided', // Default name for hero form
                     email: email,
-                    source: 'hero_form'
+                    source: 'hero_form',
+                    referralSource: referralSource,
+                    flowProgress: 'email_entered'
                 })
             }).catch(error => {
                 console.error('Failed to submit hero form email:', error);
@@ -307,10 +312,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 try {
                     // Send data to backend
+                    const referralSource = getReferralSource();
                     const requestBody = {
                         name: name,
                         email: email,
-                        source: 'modal_funnel'
+                        source: 'modal_funnel',
+                        referralSource: referralSource,
+                        flowProgress: 'name_captured'
                     };
                     
                     console.log('Sending request to /api/signup');
@@ -648,8 +656,14 @@ function showFunnelStep(step) {
     if (current) {
         current.style.display = 'block';
         
-        // If showing step 5 and we have an actual position, update it
-        if (step === 5 && window.actualWaitlistPosition) {
+        // Track progress for specific steps
+        if (step === 4) {
+            // User viewed the upgrade prompt
+            updateFlowProgress('viewed_upgrade');
+        } else if (step === 5 && window.actualWaitlistPosition) {
+            // User reached the waitlist confirmation
+            updateFlowProgress('joined_waitlist');
+            
             const positionElement = document.getElementById('waitlistNumber');
             if (positionElement) {
                 positionElement.textContent = window.actualWaitlistPosition;
@@ -713,6 +727,9 @@ function startLoadingAnimation(userName) {
         }
     }
     setTimeout(typeChar, 300);
+    
+    // Update progress when search starts
+    updateFlowProgress('search_started');
 }
 function showDbScanPhase() {
     const dbScanPhase = document.getElementById('dbScanPhase');
@@ -893,6 +910,9 @@ function showCardsPhase() {
             showFunnelStep(3);
         }, 500);
     }, 1800);
+    
+    // Update progress when search completes
+    updateFlowProgress('search_completed');
 }
 
 // Mobile menu toggle functionality
@@ -1024,3 +1044,45 @@ document.addEventListener('keydown', function(e) {
         closeSettlementModal();
     }
 });
+
+// Helper function to get referral source
+function getReferralSource() {
+    const referrer = document.referrer;
+    console.log('Document referrer:', referrer);
+    
+    // Return the raw referrer, or 'direct' if empty
+    return referrer || 'direct';
+}
+
+// Helper function to update flow progress
+async function updateFlowProgress(progress) {
+    const email = localStorage.getItem('userEmail');
+    if (!email) {
+        console.log('No email found, skipping progress update');
+        return;
+    }
+    
+    console.log('Updating flow progress to:', progress);
+    
+    try {
+        const response = await fetch('/api/update-progress', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                email: email,
+                flowProgress: progress
+            })
+        });
+        
+        const data = await response.json();
+        if (data.success) {
+            console.log('Flow progress updated successfully:', progress);
+        } else {
+            console.error('Failed to update flow progress:', data.error);
+        }
+    } catch (error) {
+        console.error('Error updating flow progress:', error);
+    }
+}

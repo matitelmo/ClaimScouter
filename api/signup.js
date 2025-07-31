@@ -21,8 +21,8 @@ export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
   try {
-    const { email, name, source = 'unknown' } = req.body;
-    console.log('Extracted data:', { email, name, source });
+    const { email, name, source = 'unknown', referralSource = 'direct', flowProgress = 'email_entered' } = req.body;
+    console.log('Extracted data:', { email, name, source, referralSource, flowProgress });
 
     // Validate input
     if (!email || !name) {
@@ -79,6 +79,8 @@ export default async function handler(req, res) {
       name: sanitizedName,
       position: position,
       source: source,
+      referral_source: referralSource,
+      flow_progress: flowProgress,
       metadata: {
         user_agent: req.headers['user-agent'] || 'unknown',
         ip: req.headers['x-forwarded-for'] || req.headers['x-real-ip'] || 'unknown',

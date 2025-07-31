@@ -5,6 +5,9 @@
   "functions": {
     "api/signup.js": {
       "maxDuration": 10
+    },
+    "api/update-progress.js": {
+      "maxDuration": 10
     }
   },
   "headers": [
