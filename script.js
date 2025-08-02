@@ -18,7 +18,7 @@ window.handleHeroEmailSubmit = function(event) {
             const referralSource = getReferralSource();
             console.log('Referral source:', referralSource);
             
-            fetch('/api/signup', {
+            fetch('/api/signup-simple', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -321,10 +321,10 @@ document.addEventListener('DOMContentLoaded', function() {
                         flowProgress: 'name_captured'
                     };
                     
-                    console.log('Sending request to /api/signup');
+                    console.log('Sending request to /api/signup-simple');
                     console.log('Request body:', requestBody);
                     
-                    const response = await fetch('/api/signup', {
+                    const response = await fetch('/api/signup-simple', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
@@ -347,8 +347,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     
                     if (data.success) {
                         // Store the actual position
-                        window.actualWaitlistPosition = data.position;
-                        console.log('SUCCESS: Added to waitlist at position:', data.position);
+                        // window.actualWaitlistPosition = data.position; // Removed - not displaying position
+                        console.log('SUCCESS: Added to waitlist');
                         console.log('Full success response:', data);
                     } else {
                         // Log error but continue with the flow
@@ -660,14 +660,11 @@ function showFunnelStep(step) {
         if (step === 4) {
             // User viewed the upgrade prompt
             updateFlowProgress('viewed_upgrade');
-        } else if (step === 5 && window.actualWaitlistPosition) {
+        } else if (step === 5) {
             // User reached the waitlist confirmation
             updateFlowProgress('joined_waitlist');
             
-            const positionElement = document.getElementById('waitlistNumber');
-            if (positionElement) {
-                positionElement.textContent = window.actualWaitlistPosition;
-            }
+            // Removed position display logic
         }
     }
 }
@@ -1065,7 +1062,7 @@ async function updateFlowProgress(progress) {
     console.log('Updating flow progress to:', progress);
     
     try {
-        const response = await fetch('/api/update-progress', {
+        const response = await fetch('/api/update-progress-simple', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

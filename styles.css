@@ -4626,10 +4626,7 @@ form#nameCaptureForm {
     line-height: 1.5;
 }
 
-#waitlistNumber {
-    font-weight: 700;
-    color: #0ea5e9;
-}
+/* Removed #waitlistNumber styles - no longer displaying position */
 
 
 

@@ -6,7 +6,13 @@
     "api/signup.js": {
       "maxDuration": 10
     },
+    "api/signup-simple.js": {
+      "maxDuration": 10
+    },
     "api/update-progress.js": {
+      "maxDuration": 10
+    },
+    "api/update-progress-simple.js": {
       "maxDuration": 10
     }
   },
